@@ -1,8 +1,18 @@
 import React from 'react';
-import { Sliders, Clock } from 'lucide-react';
+import { 
+  Sliders, 
+  Clock, 
+  Play, 
+  Pause, 
+  SkipBack, 
+  SkipForward,
+  BarChart3,
+  Square,
+  RotateCcw
+} from 'lucide-react';
 import { useExecution } from '../context/ExecutionContext';
 
-export default function ExecutionTimeline() {
+export default function ExecutionTimeline({ showStats, onToggleStats }) {
   const {
     currentAlgorithm,
     snapshots,
@@ -11,16 +21,21 @@ export default function ExecutionTimeline() {
     goToStep,
     playbackSpeed,
     setSpeed,
-    isPlaying
+    isPlaying,
+    nextStep,
+    prevStep,
+    togglePlay,
+    stop,
+    restart
   } = useExecution();
 
   const totalSteps = snapshots.length - 1;
   const currentStep = currentSnapshotIndex;
   
-  // Calculate percentage for progress fill
-  const progressPercent = totalSteps > 0 ? (currentStep / totalSteps) * 100 : 0;
+  // Calculate percentage progress
+  const progressPercentRaw = totalSteps > 0 ? (currentStep / totalSteps) * 100 : 0;
+  const progressPercent = Math.round(progressPercentRaw);
 
-  // Handle track scrubbing clicks
   const handleTrackClick = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
@@ -36,30 +51,29 @@ export default function ExecutionTimeline() {
   const activeLine = currentSnapshot?.currentLine || 2;
   const getBreakpointDescription = () => {
     if (currentAlgorithm === 'factorial') {
-      if (activeLine === 2) return `Line 2: function factorial(n) {   [n = ${currentSnapshot?.variables[0]?.value}]`;
-      if (activeLine === 4) return `Line 4: if (n <= 1) {             [checking ${currentSnapshot?.variables[0]?.value} <= 1]`;
-      if (activeLine === 5) return `Line 5: return 1;                  [base case reached]`;
-      if (activeLine === 9) return `Line 9: return n * factorial(n - 1);`;
+      if (activeLine === 2) return `Line 2: function factorial(n)`;
+      if (activeLine === 4) return `Line 4: if (n <= 1)`;
+      if (activeLine === 5) return `Line 5: return 1`;
+      if (activeLine === 9) return `Line 9: return n * factorial(n - 1)`;
     } else if (currentAlgorithm === 'fibonacci') {
-      if (activeLine === 2) return `Line 2: function fib(n) {          [n = ${currentSnapshot?.variables[0]?.value}]`;
-      if (activeLine === 4) return `Line 4: if (n <= 0) return 0;      [checking ${currentSnapshot?.variables[0]?.value} <= 0]`;
-      if (activeLine === 5) return `Line 5: if (n === 1) return 1;     [checking ${currentSnapshot?.variables[0]?.value} === 1]`;
-      if (activeLine === 8) return `Line 8: return fib(n - 1) + fib(n - 2);`;
+      if (activeLine === 2) return `Line 2: function fib(n)`;
+      if (activeLine === 4) return `Line 4: if (n <= 0) return 0`;
+      if (activeLine === 5) return `Line 5: if (n === 1) return 1`;
+      if (activeLine === 8) return `Line 8: return fib(n - 1) + fib(n - 2)`;
     } else if (currentAlgorithm === 'binarySearch') {
       const vars = currentSnapshot?.variables || [];
       const low = vars.find(v => v.name === 'low')?.value;
       const high = vars.find(v => v.name === 'high')?.value;
-      const mid = vars.find(v => v.name === 'mid')?.value;
       
-      if (activeLine === 2) return `Line 2: function binarySearch(arr, target, low, high) { [low=${low}, high=${high}]`;
-      if (activeLine === 4) return `Line 4: if (low > high) return -1;  [checking ${low} > ${high}]`;
-      if (activeLine === 6) return `Line 6: const mid = Math.floor((low + high) / 2);     [mid = ${mid}]`;
-      if (activeLine === 9) return `Line 9: if (arr[mid] === target) return mid;         [checking arr[${mid}] === target]`;
-      if (activeLine === 12) return `Line 12: if (arr[mid] > target) {`;
-      if (activeLine === 13) return `Line 13: return binarySearch(arr, target, low, mid - 1);`;
-      if (activeLine === 15) return `Line 15: return binarySearch(arr, target, mid + 1, high);`;
+      if (activeLine === 2) return `Line 2: function BS [low=${low}, high=${high}]`;
+      if (activeLine === 4) return `Line 4: if (low > high)`;
+      if (activeLine === 6) return `Line 6: const mid`;
+      if (activeLine === 9) return `Line 9: if (arr[mid] === target)`;
+      if (activeLine === 12) return `Line 12: if (arr[mid] > target)`;
+      if (activeLine === 13) return `Line 13: return BS(left)`;
+      if (activeLine === 15) return `Line 15: return BS(right)`;
     }
-    return `Line ${activeLine}: executing...`;
+    return `Line ${activeLine}`;
   };
 
   return (
@@ -67,39 +81,35 @@ export default function ExecutionTimeline() {
       <div className="panel-header">
         <div className="panel-title">
           <Sliders size={14} className="panel-title-icon" />
-          <span>Execution Timeline</span>
+          <span>Playback Timeline</span>
         </div>
-        <div className="timeline-meta">
+        <div className="timeline-meta" style={{ gap: 'var(--space-md)' }}>
           <span className="timeline-step-badge">Step {currentStep} of {totalSteps}</span>
+          <span className="timeline-percent-badge">{progressPercent}%</span>
         </div>
       </div>
       
-      <div className="panel-body timeline-body">
+      <div className="panel-body timeline-body" style={{ gap: 'var(--space-sm)' }}>
+        {/* Track Slider Bar */}
         <div className="timeline-container">
           <div 
             className="timeline-track-wrapper" 
             onClick={handleTrackClick}
             style={{ cursor: 'pointer', padding: '8px 0' }}
           >
-            {/* The active filling bar */}
             <div 
               className="timeline-progress-fill"
-              style={{ width: `${progressPercent}%`, height: '4px', top: '8px' }}
+              style={{ width: `${progressPercentRaw}%`, height: '4px', top: '8px' }}
             ></div>
-            
-            {/* The timeline track */}
             <div className="timeline-track" style={{ height: '4px', top: '8px' }}></div>
-            
-            {/* The playhead node */}
             <div 
               className={`timeline-playhead ${isPlaying ? 'glow-active' : ''}`}
-              style={{ left: `${progressPercent}%`, top: '3px' }}
+              style={{ left: `${progressPercentRaw}%`, top: '3px' }}
               title={`Playhead: Step ${currentStep}`}
             >
               <div className="playhead-inner"></div>
             </div>
 
-            {/* Individual step ticks */}
             {Array.from({ length: totalSteps + 1 }).map((_, i) => {
               const tickPos = totalSteps > 0 ? (i / totalSteps) * 100 : 0;
               const isPassed = i <= currentStep;
@@ -109,7 +119,7 @@ export default function ExecutionTimeline() {
                   className={`timeline-tick ${isPassed ? 'passed' : ''}`}
                   style={{ left: `${tickPos}%`, top: '5px' }}
                   onClick={(e) => {
-                    e.stopPropagation(); // prevent triggering track click again
+                    e.stopPropagation();
                     goToStep(i);
                   }}
                   title={`Step ${i}`}
@@ -121,29 +131,94 @@ export default function ExecutionTimeline() {
           </div>
         </div>
 
-        <div className="timeline-controls-footer">
-          <div className="footer-left">
-            <span className="debug-state-tag">
-              {isPlaying ? 'Replaying' : (currentSnapshot?.executionStatus === 'completed' ? 'Completed' : 'Paused')}
+        {/* Player Buttons & Metadata Controls */}
+        <div className="timeline-controls-footer" style={{ marginTop: 'var(--space-sm)', alignItems: 'center' }}>
+          <div className="footer-left" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 'var(--space-md)', overflow: 'hidden' }}>
+            <span className={`event-badge badge-${currentSnapshot?.eventType?.toLowerCase().replace('_', '-')}`}>
+              {currentSnapshot?.eventType}
             </span>
-            <span className="debug-code-info">{getBreakpointDescription()}</span>
+            <span className="status-message-text" style={{ fontWeight: '600', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>
+              {currentSnapshot?.statusMessage}
+            </span>
+            <span className="debug-code-info" style={{ color: 'var(--text-muted)', fontSize: '11px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+              {getBreakpointDescription()}
+            </span>
           </div>
 
-          <div className="footer-right">
-            <div className="speed-control">
+          {/* Center Playback Buttons */}
+          <div className="timeline-player-buttons" style={{ display: 'flex', gap: 'var(--space-xs)', alignItems: 'center' }}>
+            <button 
+              className="player-btn"
+              onClick={restart}
+              title="Restart (R)"
+            >
+              <RotateCcw size={14} />
+            </button>
+
+            <button 
+              className="player-btn"
+              onClick={prevStep}
+              disabled={currentStep === 0}
+              title="Previous Step (Left Arrow)"
+            >
+              <SkipBack size={14} />
+            </button>
+
+            <button 
+              className={`player-btn main-play-btn ${isPlaying ? 'playing' : ''}`}
+              onClick={togglePlay}
+              title={isPlaying ? "Pause (Space)" : "Play (Space)"}
+            >
+              {isPlaying ? <Pause size={14} fill="currentColor" /> : <Play size={14} fill="currentColor" />}
+            </button>
+
+            <button 
+              className="player-btn"
+              onClick={stop}
+              title="Stop"
+            >
+              <Square size={13} fill="currentColor" style={{ stroke: 'none' }} />
+            </button>
+
+            <button 
+              className="player-btn"
+              onClick={nextStep}
+              disabled={currentStep === totalSteps}
+              title="Next Step (Right Arrow)"
+            >
+              <SkipForward size={14} />
+            </button>
+          </div>
+
+          {/* Right speed select & statistics toggle */}
+          <div className="footer-right" style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-md)', alignItems: 'center' }}>
+            <div className="speed-control" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
               <Clock size={12} className="speed-icon" />
-              <span>Interval:</span>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Speed:</span>
               <select 
                 className="speed-select" 
                 value={playbackSpeed}
                 onChange={(e) => setSpeed(Number(e.target.value))}
+                style={{ padding: '2px 4px', fontSize: '11px', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-xs)', backgroundColor: 'var(--bg-panel)' }}
               >
-                <option value={2000}>2.0s (Slow)</option>
-                <option value={1000}>1.0s (Normal)</option>
-                <option value={500}>0.5s (Fast)</option>
-                <option value={250}>0.25s (Super Fast)</option>
+                <option value={0.25}>0.25x</option>
+                <option value={0.5}>0.5x</option>
+                <option value={1}>1x</option>
+                <option value={2}>2x</option>
+                <option value={5}>5x</option>
               </select>
             </div>
+
+            <div className="navbar-divider" style={{ height: '14px', margin: '0' }}></div>
+
+            <button 
+              className={`stats-toggle-btn ${showStats ? 'active' : ''}`}
+              onClick={onToggleStats}
+              title={showStats ? "Hide Statistics" : "Show Statistics"}
+            >
+              <BarChart3 size={14} />
+              <span>Stats</span>
+            </button>
           </div>
         </div>
       </div>

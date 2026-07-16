@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react';
+import { runFactorialSimulation } from '../utils/factorialSimulation';
 
 const ExecutionContext = createContext(null);
 
@@ -1535,6 +1536,71 @@ const mockSnapshotsDatabase = {
   binarySearch: binarySearchSnapshots
 };
 
+// Pre-process mockSnapshotsDatabase to add unique ID, eventType, and statusMessage
+Object.keys(mockSnapshotsDatabase).forEach((algo) => {
+  const list = mockSnapshotsDatabase[algo];
+  const totalSteps = list.length;
+  mockSnapshotsDatabase[algo] = list.map((snap, idx) => {
+    let eventType = 'CALL';
+    if (snap.executionStatus === 'completed' || idx === totalSteps - 1) {
+      eventType = 'COMPLETE';
+    } else {
+      if (algo === 'factorial') {
+        if (idx === 14) {
+          eventType = 'BASE_CASE';
+        } else if (idx >= 15) {
+          eventType = 'RETURN';
+        }
+      } else if (algo === 'fibonacci') {
+        const nVar = snap.variables?.find((v) => v.name === 'n');
+        const nVal = nVar ? parseInt(nVar.value) : null;
+        if ((nVal === 1 || nVal === 0) && (snap.currentLine === 4 || snap.currentLine === 5)) {
+          eventType = 'BASE_CASE';
+        } else if (snap.returnValue !== undefined) {
+          eventType = 'RETURN';
+        }
+      } else if (algo === 'binarySearch') {
+        if (snap.currentLine === 4) {
+          const lowVar = snap.variables?.find((v) => v.name === 'low');
+          const highVar = snap.variables?.find((v) => v.name === 'high');
+          const lowVal = lowVar ? parseInt(lowVar.value) : 0;
+          const highVal = highVar ? parseInt(highVar.value) : 0;
+          if (lowVal > highVal) {
+            eventType = 'BASE_CASE';
+          }
+        } else if (snap.currentLine === 9 && snap.returnValue !== undefined) {
+          eventType = 'BASE_CASE';
+        } else if (snap.returnValue !== undefined) {
+          eventType = 'RETURN';
+        }
+      }
+    }
+
+    // Generate dynamic descriptive statusMessage
+    let statusMessage = '';
+    if (eventType === 'COMPLETE') {
+      statusMessage = 'Execution Finished';
+    } else if (eventType === 'BASE_CASE') {
+      statusMessage = 'Base Case Reached';
+    } else {
+      const activeFrame = snap.callStack?.[0];
+      const frameName = activeFrame ? activeFrame.name : '';
+      if (eventType === 'RETURN') {
+        statusMessage = `Returning from ${frameName}`;
+      } else {
+        statusMessage = `Calling ${frameName}`;
+      }
+    }
+
+    return {
+      ...snap,
+      id: `${algo}_snap_${idx}`,
+      eventType,
+      statusMessage
+    };
+  });
+});
+
 // Default Statistics Generator helper based on algorithm & step
 const getStatistics = (algorithm, index, totalSteps, snapshots) => {
   const currentSnapshot = snapshots[index];
@@ -1543,12 +1609,14 @@ const getStatistics = (algorithm, index, totalSteps, snapshots) => {
   
   // Custom metrics based on algorithm
   if (algorithm === 'factorial') {
+    const totalCallsCount = currentSnapshot?.recursionTreeNodes?.length || 1;
+    const baseCaseHitsCount = snapshots.slice(0, index + 1).filter(s => s.eventType === 'BASE_CASE').length;
     return [
-      { label: 'Total Calls', value: `${index >= 12 ? 5 : (index >= 9 ? 4 : (index >= 6 ? 3 : (index >= 3 ? 2 : 1)))}`, icon: 'BarChart3', color: 'info' },
+      { label: 'Total Calls', value: `${totalCallsCount}`, icon: 'BarChart3', color: 'info' },
       { label: 'Max Depth', value: `${maxDepth}`, icon: 'Layers3', color: 'accent' },
       { label: 'Current Depth', value: `${activeCalls}`, icon: 'Layers3', color: 'warning' },
       { label: 'Execution Time', value: `${(index * 0.005).toFixed(3)}ms`, icon: 'Hourglass', color: 'success' },
-      { label: 'Base Case Hits', value: `${index >= 12 ? 1 : 0}`, icon: 'CheckCircle2', color: 'success' },
+      { label: 'Base Case Hits', value: `${baseCaseHitsCount}`, icon: 'CheckCircle2', color: 'success' },
       { label: 'Repeated Calls', value: '0', icon: 'Copy', color: 'muted' },
       { label: 'Memory Overhead', value: `${(activeCalls * 0.08).toFixed(1)} KB`, icon: 'Cpu', color: 'danger' }
     ];
@@ -1584,9 +1652,17 @@ export const ExecutionProvider = ({ children }) => {
   const [currentAlgorithm, setCurrentAlgorithm] = useState('factorial');
   const [currentSnapshotIndex, setCurrentSnapshotIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1000); // Default 1000ms
+  const [playbackSpeed, setPlaybackSpeed] = useState(1); // 1x multiplier default
+  const [factorialInput, setFactorialInput] = useState(5);
 
-  const snapshots = mockSnapshotsDatabase[currentAlgorithm] || factorialSnapshots;
+  const generateSession = useCallback((algoId, inputVal) => {
+    if (algoId === 'factorial') {
+      return runFactorialSimulation(inputVal);
+    }
+    return mockSnapshotsDatabase[algoId] || mockSnapshotsDatabase.factorial;
+  }, []);
+
+  const [snapshots, setSnapshots] = useState(() => runFactorialSimulation(5));
   const currentSnapshot = snapshots[currentSnapshotIndex] || snapshots[0];
   const statistics = getStatistics(currentAlgorithm, currentSnapshotIndex, snapshots.length, snapshots);
 
@@ -1596,6 +1672,7 @@ export const ExecutionProvider = ({ children }) => {
   // Auto-advance snapshots when isPlaying is active
   useEffect(() => {
     if (isPlaying) {
+      const intervalMs = Math.round(1000 / playbackSpeed);
       timerRef.current = setInterval(() => {
         setCurrentSnapshotIndex((prevIndex) => {
           if (prevIndex < snapshots.length - 1) {
@@ -1606,7 +1683,7 @@ export const ExecutionProvider = ({ children }) => {
             return prevIndex;
           }
         });
-      }, playbackSpeed);
+      }, intervalMs);
     } else {
       if (timerRef.current) {
         clearInterval(timerRef.current);
@@ -1620,44 +1697,102 @@ export const ExecutionProvider = ({ children }) => {
     };
   }, [isPlaying, playbackSpeed, snapshots.length]);
 
-  const setAlgorithm = (algoId) => {
+  const setAlgorithm = useCallback((algoId) => {
     setIsPlaying(false);
     setCurrentAlgorithm(algoId);
     setCurrentSnapshotIndex(0);
-  };
+    setSnapshots(generateSession(algoId, algoId === 'factorial' ? factorialInput : 5));
+  }, [generateSession, factorialInput]);
 
-  const nextStep = () => {
+  const runAlgorithm = useCallback((inputVal) => {
+    setIsPlaying(false);
+    setCurrentSnapshotIndex(0);
+    setFactorialInput(inputVal);
+    setSnapshots(generateSession(currentAlgorithm, inputVal));
+  }, [currentAlgorithm, generateSession]);
+
+  const nextStep = useCallback(() => {
     setIsPlaying(false);
     if (currentSnapshotIndex < snapshots.length - 1) {
-      setCurrentSnapshotIndex((prev) => prev + 1);
+      setCurrentSnapshotIndex(currentSnapshotIndex + 1);
     }
-  };
+  }, [currentSnapshotIndex, snapshots.length]);
 
-  const prevStep = () => {
+  const prevStep = useCallback(() => {
     setIsPlaying(false);
     if (currentSnapshotIndex > 0) {
-      setCurrentSnapshotIndex((prev) => prev - 1);
+      setCurrentSnapshotIndex(currentSnapshotIndex - 1);
     }
-  };
+  }, [currentSnapshotIndex]);
 
-  const goToStep = (index) => {
+  const goToStep = useCallback((index) => {
     setIsPlaying(false);
     if (index >= 0 && index < snapshots.length) {
       setCurrentSnapshotIndex(index);
     }
-  };
+  }, [snapshots.length]);
 
-  const togglePlay = () => {
-    // If we've reached the end, reset to step 0 before playing
-    if (!isPlaying && currentSnapshotIndex === snapshots.length - 1) {
+  const togglePlay = useCallback(() => {
+    if (currentSnapshotIndex === snapshots.length - 1) {
       setCurrentSnapshotIndex(0);
+      setIsPlaying(true);
+    } else {
+      setIsPlaying(!isPlaying);
     }
-    setIsPlaying((prev) => !prev);
-  };
+  }, [currentSnapshotIndex, isPlaying, snapshots.length]);
 
-  const setSpeed = (speedMs) => {
-    setPlaybackSpeed(speedMs);
-  };
+  const stop = useCallback(() => {
+    setIsPlaying(false);
+    setCurrentSnapshotIndex(0);
+  }, []);
+
+  const restart = useCallback(() => {
+    setCurrentSnapshotIndex(0);
+    setIsPlaying(true);
+  }, []);
+
+  const setSpeed = useCallback((multiplier) => {
+    setPlaybackSpeed(multiplier);
+  }, []);
+
+  // Global Keyboard Shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (
+        document.activeElement.tagName === 'INPUT' ||
+        document.activeElement.tagName === 'TEXTAREA' ||
+        document.activeElement.tagName === 'SELECT'
+      ) {
+        return;
+      }
+
+      const key = e.key.toLowerCase();
+      if (key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        togglePlay();
+      } else if (e.key === 'ArrowRight' || e.code === 'ArrowRight') {
+        e.preventDefault();
+        nextStep();
+      } else if (e.key === 'ArrowLeft' || e.code === 'ArrowLeft') {
+        e.preventDefault();
+        prevStep();
+      } else if (key === 'r' || e.code === 'KeyR') {
+        e.preventDefault();
+        restart();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        goToStep(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        goToStep(snapshots.length - 1);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [togglePlay, nextStep, prevStep, restart, goToStep, snapshots.length]);
 
   return (
     <ExecutionContext.Provider
@@ -1669,12 +1804,16 @@ export const ExecutionProvider = ({ children }) => {
         statistics,
         isPlaying,
         playbackSpeed,
+        factorialInput,
         setAlgorithm,
         nextStep,
         prevStep,
         goToStep,
         togglePlay,
-        setSpeed
+        stop,
+        restart,
+        setSpeed,
+        runAlgorithm
       }}
     >
       {children}
@@ -1689,3 +1828,4 @@ export const useExecution = () => {
   }
   return context;
 };
+

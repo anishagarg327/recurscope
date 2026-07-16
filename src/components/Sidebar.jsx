@@ -1,8 +1,9 @@
 import React from 'react';
 import { 
-  LayoutDashboard, 
   Terminal, 
+  GitBranch, 
   BookOpen, 
+  GraduationCap, 
   History, 
   Settings, 
   User
@@ -10,10 +11,11 @@ import {
 
 export default function Sidebar() {
   const menuItems = [
-    { name: 'Dashboard', icon: LayoutDashboard, active: false },
     { name: 'Playground', icon: Terminal, active: true },
+    { name: 'Algorithms', icon: GitBranch, active: false },
     { name: 'Examples', icon: BookOpen, active: false },
-    { name: 'Saved Sessions', icon: History, active: false },
+    { name: 'Theory', icon: GraduationCap, active: false },
+    { name: 'Replay Sessions', icon: History, active: false },
     { name: 'Settings', icon: Settings, active: false }
   ];
 

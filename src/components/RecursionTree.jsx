@@ -15,6 +15,22 @@ export default function RecursionTree() {
     nodesMap[n.id] = n;
   });
 
+  const isNodeDimmed = (node) => {
+    if (currentSnapshot?.executionStatus === 'completed') return false;
+    return node.status !== 'active' && node.status !== 'running';
+  };
+
+  const isEdgeDimmed = (edge) => {
+    if (currentSnapshot?.executionStatus === 'completed') return false;
+    const sourceNode = nodesMap[edge.from];
+    const targetNode = nodesMap[edge.to];
+    if (!sourceNode || !targetNode) return true;
+    
+    const isSourceOnStack = sourceNode.status === 'active' || sourceNode.status === 'running';
+    const isTargetOnStack = targetNode.status === 'active' || targetNode.status === 'running';
+    return !(isSourceOnStack && isTargetOnStack);
+  };
+
   const getNodeStrokeColor = (node) => {
     if (node.id === activeNodeId) return 'var(--text-primary)';
     if (node.status === 'success') return 'var(--color-success)';
@@ -92,6 +108,7 @@ export default function RecursionTree() {
                     strokeWidth={edge.status === 'active' || edge.status === 'success' ? 2 : 1} 
                     strokeDasharray={isDashed ? "3,3" : undefined}
                     markerEnd="url(#arrow)"
+                    className={isEdgeDimmed(edge) ? 'dimmed-edge' : ''}
                   />
                 );
               })}
@@ -99,24 +116,24 @@ export default function RecursionTree() {
               {/* Dynamic Nodes */}
               {nodes.map((node) => {
                 const isActive = node.id === activeNodeId;
-                const isBase = node.status === 'success' && (node.label.includes('(1)') || node.label.includes('(0)') || node.label.includes('FOUND'));
                 const strokeColor = getNodeStrokeColor(node);
                 const fillColor = getNodeFillColor(node);
+                const isDimmed = isNodeDimmed(node);
                 
                 return (
                   <g 
                     key={node.id} 
-                    className={`tree-node ${isActive ? 'active-node' : ''} ${node.status === 'dimmed' ? 'dimmed' : ''}`}
+                    className={`tree-node ${isActive ? 'active-node' : ''} ${isDimmed ? 'dimmed' : ''}`}
                     filter={isActive ? "url(#glow-node)" : undefined}
                   >
                     <circle 
-                      cx={node.cx} 
-                      cy={node.cy} 
-                      r={node.cx === 300 && node.cy === 50 && node.subLabel ? 22 : 18} // slightly larger root node for BS
-                      fill={fillColor} 
-                      stroke={strokeColor} 
-                      strokeWidth={isActive ? 3.5 : 2} 
-                      className={isActive ? "glow-active" : ""}
+                       cx={node.cx} 
+                       cy={node.cy} 
+                       r={node.cx === 300 && node.cy === 50 && node.subLabel ? 22 : 18} // slightly larger root node for BS
+                       fill={fillColor} 
+                       stroke={strokeColor} 
+                       strokeWidth={isActive ? 3.5 : 2} 
+                       className={isActive ? "glow-active" : ""}
                     />
                     <text 
                       x={node.cx} 

@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
-  Play, 
-  Pause, 
-  ChevronRight, 
-  ChevronLeft, 
-  Moon, 
   ChevronDown, 
-  GitCommit
+  GitCommit,
+  Moon,
+  Play
 } from 'lucide-react';
 import { useExecution } from '../context/ExecutionContext';
 
@@ -14,14 +11,17 @@ export default function Navbar() {
   const {
     currentAlgorithm,
     setAlgorithm,
-    nextStep,
-    prevStep,
-    togglePlay,
     isPlaying,
-    snapshots,
-    currentSnapshotIndex,
-    currentSnapshot
+    currentSnapshot,
+    factorialInput,
+    runAlgorithm
   } = useExecution();
+
+  const [localInput, setLocalInput] = useState(factorialInput);
+
+  useEffect(() => {
+    setLocalInput(factorialInput);
+  }, [factorialInput]);
 
   const algorithms = [
     { id: 'factorial', name: 'Factorial (N!)' },
@@ -29,7 +29,6 @@ export default function Navbar() {
     { id: 'binarySearch', name: 'Binary Search' }
   ];
 
-  // Map executionStatus to a user-friendly label and color class
   const getStatusDetails = (status) => {
     switch (status) {
       case 'completed':
@@ -44,6 +43,10 @@ export default function Navbar() {
 
   const statusInfo = getStatusDetails(isPlaying ? 'running' : currentSnapshot?.executionStatus);
 
+  const handleRun = () => {
+    runAlgorithm(localInput);
+  };
+
   return (
     <header className="navbar">
       <div className="navbar-left">
@@ -54,7 +57,7 @@ export default function Navbar() {
         <span className="logo-version">v0.1.0</span>
       </div>
 
-      <div className="navbar-center">
+      <div className="navbar-center" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-lg)' }}>
         {/* Algorithm Selector Dropdown */}
         <div className="dropdown-container">
           <label className="dropdown-label">Algorithm</label>
@@ -74,44 +77,56 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Playback Controls */}
-        <div className="controls-group">
-          <button 
-            className="control-btn" 
-            onClick={prevStep}
-            disabled={currentSnapshotIndex === 0}
-            title="Step Backward"
-          >
-            <ChevronLeft size={16} />
-          </button>
-          
-          <button 
-            className={`control-btn play-btn ${isPlaying ? 'playing' : ''}`}
-            onClick={togglePlay}
-            title={isPlaying ? "Pause Simulation" : "Run Simulation"}
-          >
-            {isPlaying ? (
-              <>
-                <Pause size={14} fill="currentColor" />
-                <span>Pause</span>
-              </>
-            ) : (
-              <>
-                <Play size={14} fill="currentColor" />
-                <span>Run</span>
-              </>
-            )}
-          </button>
-
-          <button 
-            className="control-btn" 
-            onClick={nextStep}
-            disabled={currentSnapshotIndex === snapshots.length - 1}
-            title="Step Forward"
-          >
-            <ChevronRight size={16} />
-          </button>
-        </div>
+        {currentAlgorithm === 'factorial' && (
+          <div className="navbar-run-control" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
+            <div className="navbar-divider" style={{ height: '20px', margin: '0' }}></div>
+            <div className="input-container" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
+              <label style={{ fontSize: '11px', fontWeight: '600', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>n =</label>
+              <input 
+                type="number" 
+                value={localInput} 
+                onChange={(e) => setLocalInput(Math.max(1, Math.min(10, parseInt(e.target.value) || 1)))}
+                min="1"
+                max="10"
+                style={{
+                  width: '50px',
+                  backgroundColor: 'var(--bg-panel)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: 'var(--radius-xs)',
+                  padding: '4px 6px',
+                  color: 'var(--text-primary)',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  textAlign: 'center',
+                  outline: 'none'
+                }}
+              />
+            </div>
+            <button 
+              onClick={handleRun}
+              className="player-btn main-play-btn"
+              style={{
+                height: '26px',
+                padding: '0 12px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'var(--space-xs)',
+                fontSize: '11px',
+                fontWeight: '700',
+                textTransform: 'uppercase',
+                letterSpacing: '0.3px',
+                backgroundColor: 'var(--accent-dim)',
+                color: 'var(--text-accent)',
+                border: '1px solid var(--accent-dim-border)',
+                borderRadius: 'var(--radius-xs)',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <Play size={11} fill="currentColor" />
+              <span>Run</span>
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="navbar-right">

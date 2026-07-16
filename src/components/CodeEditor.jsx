@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Code } from 'lucide-react';
 import { useExecution } from '../context/ExecutionContext';
 
@@ -60,6 +60,16 @@ export default function CodeEditor() {
   const { currentAlgorithm, currentSnapshot } = useExecution();
   const codeData = codeSnippets[currentAlgorithm] || codeSnippets.factorial;
   const activeLine = currentSnapshot?.currentLine || 1;
+  const activeLineRef = useRef(null);
+
+  useEffect(() => {
+    if (activeLineRef.current) {
+      activeLineRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest'
+      });
+    }
+  }, [activeLine]);
 
   const renderHighlightedLine = (line) => {
     const text = line.text;
@@ -138,6 +148,7 @@ export default function CodeEditor() {
               return (
                 <div 
                   key={index} 
+                  ref={isExecuting ? activeLineRef : null}
                   className={`code-line ${isExecuting ? 'active-execution-line glow-active' : ''}`}
                   style={{ paddingLeft: `${(line.indent || 0) * 16}px` }}
                 >

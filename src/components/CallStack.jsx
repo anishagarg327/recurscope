@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layers } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useExecution } from '../context/ExecutionContext';
 
 export default function CallStack() {
@@ -25,37 +26,45 @@ export default function CallStack() {
           <div className="empty-state">No active stack frames</div>
         ) : (
           <div className="stack-frames-list">
-            {stackFrames.map((frame, index) => {
-              const isTop = index === 0;
-              const isBase = isBaseCaseFrame(frame.name);
-              return (
-                <div 
-                  key={index} 
-                  className={`stack-frame-card ${isTop ? 'active-frame glow-active' : ''} ${isBase ? 'base-case-frame' : ''}`}
-                >
-                  <div className="frame-header">
-                    <span className="frame-number">#{stackFrames.length - index}</span>
-                    <span className="frame-name">{frame.name}</span>
-                    {isBase && (
-                      <span className="base-case-badge">Base Case</span>
-                    )}
-                    {isTop && !isBase && (
-                      <span className="active-badge">Active</span>
-                    )}
-                  </div>
-                  
-                  <div className="frame-meta">
-                    <span className="frame-line">{frame.line}</span>
-                    <span className="frame-depth">Depth: {frame.depth}</span>
-                  </div>
-                  
-                  <div className="frame-variables">
-                    <span className="var-label">Scope:</span>
-                    <span className="var-value">{frame.variables}</span>
-                  </div>
-                </div>
-              );
-            })}
+            <AnimatePresence initial={false}>
+              {stackFrames.map((frame, index) => {
+                const isTop = index === 0;
+                const isBase = isBaseCaseFrame(frame.name);
+                const frameKey = `${frame.name}_${frame.depth}`;
+                return (
+                  <motion.div 
+                    key={frameKey} 
+                    className={`stack-frame-card ${isTop ? 'active-frame glow-active' : ''} ${isBase ? 'base-case-frame' : ''}`}
+                    initial={{ opacity: 0, y: -12, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 12, scale: 0.98 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    layout
+                  >
+                    <div className="frame-header">
+                      <span className="frame-number">#{stackFrames.length - index}</span>
+                      <span className="frame-name">{frame.name}</span>
+                      {isBase && (
+                        <span className="base-case-badge">Base Case</span>
+                      )}
+                      {isTop && !isBase && (
+                        <span className="active-badge">Active</span>
+                      )}
+                    </div>
+                    
+                    <div className="frame-meta">
+                      <span className="frame-line">{frame.line}</span>
+                      <span className="frame-depth">Depth: {frame.depth}</span>
+                    </div>
+                    
+                    <div className="frame-variables">
+                      <span className="var-label">Scope:</span>
+                      <span className="var-value">{frame.variables}</span>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
           </div>
         )}
       </div>
