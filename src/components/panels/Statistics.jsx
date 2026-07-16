@@ -7,7 +7,10 @@ import {
   Copy, 
   Cpu 
 } from 'lucide-react';
-import { useExecution } from '../context/ExecutionContext';
+import { useExecution } from '../../contexts/ExecutionContext';
+import { usePlayback } from '../../contexts/PlaybackContext';
+import { useAlgorithms } from '../../contexts/AlgorithmsContext';
+import { computeStatistics } from '../../core/execution/stats';
 
 const iconMap = {
   BarChart3,
@@ -19,7 +22,11 @@ const iconMap = {
 };
 
 export default function Statistics() {
-  const { statistics } = useExecution();
+  const { snapshots } = useExecution();
+  const { currentStepIndex } = usePlayback();
+  const { selectedAlgorithmId } = useAlgorithms();
+
+  const statistics = computeStatistics(selectedAlgorithmId, currentStepIndex, snapshots);
 
   return (
     <div className="panel stats-panel">

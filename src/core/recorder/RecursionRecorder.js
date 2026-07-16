@@ -1,3 +1,5 @@
+import { ExecutionEvent } from '../execution/types';
+
 export default class RecursionRecorder {
   constructor(algorithmName) {
     this.algorithmName = algorithmName;
@@ -76,7 +78,8 @@ export default class RecursionRecorder {
       returnValue: undefined,
       executionStatus: 'running',
       depth,
-      eventType: 'CALL',
+      eventType: ExecutionEvent.CALL,
+      event: ExecutionEvent.CALL,
       id: `${this.algorithmName}_snap_${this.stepNumber - 1}`,
       timestamp: Date.now(),
       statusMessage: statusMessage || `Calling ${functionName}`
@@ -127,7 +130,8 @@ export default class RecursionRecorder {
       returnValue,
       executionStatus: 'running',
       depth,
-      eventType: 'BASE_CASE',
+      eventType: ExecutionEvent.BASE_CASE,
+      event: ExecutionEvent.BASE_CASE,
       id: `${this.algorithmName}_snap_${this.stepNumber - 1}`,
       timestamp: Date.now(),
       statusMessage: statusMessage || 'Reached Base Case'
@@ -177,7 +181,8 @@ export default class RecursionRecorder {
       returnValue,
       executionStatus: 'running',
       depth,
-      eventType: 'RETURN',
+      eventType: ExecutionEvent.RETURN,
+      event: ExecutionEvent.RETURN,
       id: `${this.algorithmName}_snap_${this.stepNumber - 1}`,
       timestamp: Date.now(),
       statusMessage: statusMessage || `Returning value ${returnValue}`
@@ -191,14 +196,15 @@ export default class RecursionRecorder {
     if (this.snapshots.length > 0) {
       const lastSnap = this.snapshots[this.snapshots.length - 1];
       lastSnap.executionStatus = 'completed';
-      lastSnap.eventType = 'COMPLETE';
+      lastSnap.eventType = ExecutionEvent.COMPLETE;
+      lastSnap.event = ExecutionEvent.COMPLETE;
     }
   }
 
   getExecutionSession() {
     return this.snapshots.map((snap) => {
       let statusMessage = snap.statusMessage;
-      if (snap.eventType === 'COMPLETE') {
+      if (snap.event === ExecutionEvent.COMPLETE) {
         statusMessage = 'Execution Completed';
       }
       return {

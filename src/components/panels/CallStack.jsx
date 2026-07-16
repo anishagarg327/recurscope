@@ -1,10 +1,10 @@
 import React from 'react';
 import { Layers } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useExecution } from '../context/ExecutionContext';
+import { usePlayback } from '../../contexts/PlaybackContext';
 
 export default function CallStack() {
-  const { currentSnapshot } = useExecution();
+  const { currentSnapshot } = usePlayback();
   const stackFrames = currentSnapshot?.callStack || [];
 
   const isBaseCaseFrame = (name) => {

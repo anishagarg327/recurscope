@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
-import CodeEditor from './components/CodeEditor';
-import CallStack from './components/CallStack';
-import VariableInspector from './components/VariableInspector';
-import RecursionTree from './components/RecursionTree';
-import ExecutionDetails from './components/ExecutionDetails';
-import Statistics from './components/Statistics';
-import ExecutionTimeline from './components/ExecutionTimeline';
+import CodeEditor from './components/panels/CodeEditor';
+import CallStack from './components/panels/CallStack';
+import VariableInspector from './components/panels/VariableInspector';
+import RecursionTree from './components/panels/RecursionTree';
+import ExecutionDetails from './components/panels/ExecutionDetails';
+import Statistics from './components/panels/Statistics';
+import ExecutionTimeline from './components/panels/ExecutionTimeline';
+import { SettingsProvider, useSettings } from './contexts/SettingsContext';
+import { AlgorithmsProvider } from './contexts/AlgorithmsContext';
+import { ExecutionProvider } from './contexts/ExecutionContext';
+import { PlaybackProvider } from './contexts/PlaybackContext';
 import './App.css';
 
-function App() {
-  // State for toggling the collapsible statistics bottom drawer
-  const [showStats, setShowStats] = useState(false);
+function MainLayout() {
+  const { showStats } = useSettings();
 
   return (
     <div className="app-wrapper">
@@ -31,31 +34,23 @@ function App() {
             {/* Left Column: Code Editor & Variable Inspector */}
             <div className="workspace-col-left">
               <CodeEditor />
-              
-              {/* Visual Row Splitter */}
               <div className="resizer-v"></div>
-              
               <VariableInspector />
             </div>
 
-            {/* Visual Column Splitter */}
             <div className="resizer-h"></div>
 
-            {/* Center Column: Recursion Tree Canvas (Expands significantly!) */}
+            {/* Center Column: Recursion Tree Canvas */}
             <div className="workspace-col-center">
               <RecursionTree />
             </div>
 
-            {/* Visual Column Splitter */}
             <div className="resizer-h"></div>
 
             {/* Right Column: Call Stack & Execution Details */}
             <div className="workspace-col-right">
               <CallStack />
-
-              {/* Visual Row Splitter */}
               <div className="resizer-v"></div>
-
               <ExecutionDetails />
             </div>
           </div>
@@ -69,14 +64,25 @@ function App() {
 
           {/* Bottom Row: Execution Timeline controls */}
           <div className="timeline-row">
-            <ExecutionTimeline 
-              showStats={showStats} 
-              onToggleStats={() => setShowStats(!showStats)} 
-            />
+            <ExecutionTimeline />
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <SettingsProvider>
+      <AlgorithmsProvider>
+        <ExecutionProvider>
+          <PlaybackProvider>
+            <MainLayout />
+          </PlaybackProvider>
+        </ExecutionProvider>
+      </AlgorithmsProvider>
+    </SettingsProvider>
   );
 }
 

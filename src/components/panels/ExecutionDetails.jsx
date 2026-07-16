@@ -5,12 +5,14 @@ import {
   Layers, 
   Activity, 
   CornerDownLeft, 
-  CheckCircle2 
+  CheckCircle2,
+  Tag
 } from 'lucide-react';
-import { useExecution } from '../context/ExecutionContext';
+import { usePlayback } from '../../contexts/PlaybackContext';
+import { getTypeColorClass } from '../../core/execution/types';
 
 export default function ExecutionDetails() {
-  const { currentAlgorithm, currentSnapshot } = useExecution();
+  const { currentSnapshot } = usePlayback();
 
   if (!currentSnapshot) {
     return (
@@ -33,32 +35,10 @@ export default function ExecutionDetails() {
     currentLine,
     depth,
     returnValue,
-    executionStatus
+    executionStatus,
+    event,
+    statusMessage
   } = currentSnapshot;
-
-  // Determine current action based on algorithm and line number
-  const getActionText = () => {
-    if (currentAlgorithm === 'factorial') {
-      if (currentLine === 2) return 'Calling function entry scope';
-      if (currentLine === 4) return 'Evaluating condition (n <= 1)';
-      if (currentLine === 5) return 'Returning base case value: 1';
-      if (currentLine === 9) return returnValue !== undefined ? `Returning resolved stack relation: ${returnValue}` : 'Recurse: computing relation (n * f(n-1))';
-    } else if (currentAlgorithm === 'fibonacci') {
-      if (currentLine === 2) return 'Calling function entry scope';
-      if (currentLine === 4) return 'Evaluating base case (n <= 0)';
-      if (currentLine === 5) return 'Evaluating base case (n === 1)';
-      if (currentLine === 8) return returnValue !== undefined ? `Combining branches return: ${returnValue}` : 'Spawning child branch execution';
-    } else if (currentAlgorithm === 'binarySearch') {
-      if (currentLine === 2) return 'Calling array search scope';
-      if (currentLine === 4) return 'Evaluating range exhaust condition';
-      if (currentLine === 6) return 'Calculating mid-point split index';
-      if (currentLine === 9) return returnValue !== undefined ? `Target found at mid-point: index ${returnValue}` : 'Evaluating if target is found';
-      if (currentLine === 12) return 'Comparing midpoint element value';
-      if (currentLine === 13) return 'Recurse: searching lower left half';
-      if (currentLine === 15) return 'Recurse: searching upper right half';
-    }
-    return 'Processing execution step';
-  };
 
   const getStatusBadgeClass = (status) => {
     if (status === 'completed') return 'badge-completed';
@@ -70,7 +50,8 @@ export default function ExecutionDetails() {
     { label: 'Current Function', value: `${activeFunction}()`, icon: Braces, type: 'code' },
     { label: 'Current Line', value: `line ${currentLine}`, icon: Hash, type: 'number' },
     { label: 'Current Depth', value: `${depth} stack frames`, icon: Layers, type: 'number' },
-    { label: 'Current Action', value: getActionText(), icon: Activity, type: 'text' },
+    { label: 'Debugger Event', value: event, icon: Tag, type: 'event-badge' },
+    { label: 'Current Action', value: statusMessage, icon: Activity, type: 'text' },
     { label: 'Return Value', value: returnValue !== undefined ? String(returnValue) : 'pending...', icon: CornerDownLeft, type: returnValue !== undefined ? 'success' : 'muted' },
     { label: 'Execution Status', value: executionStatus, icon: CheckCircle2, type: 'badge' }
   ];
@@ -98,6 +79,10 @@ export default function ExecutionDetails() {
                 <div className="details-row-right">
                   {item.type === 'badge' ? (
                     <span className={`details-badge ${getStatusBadgeClass(item.value)}`}>
+                      {item.value}
+                    </span>
+                  ) : item.type === 'event-badge' ? (
+                    <span className={`details-badge ${getTypeColorClass(item.value)}`}>
                       {item.value}
                     </span>
                   ) : item.type === 'code' ? (

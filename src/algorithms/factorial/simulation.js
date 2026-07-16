@@ -1,4 +1,4 @@
-import RecursionRecorder from './RecursionRecorder';
+import RecursionRecorder from '../../core/recorder/RecursionRecorder';
 
 export function runFactorialSimulation(n) {
   const recorder = new RecursionRecorder('factorial');

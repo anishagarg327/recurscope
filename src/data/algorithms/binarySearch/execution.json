@@ -1,0 +1,1197 @@
+[
+  {
+    "stepNumber": 0,
+    "currentLine": 2,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:2",
+        "depth": 0,
+        "variables": "low = 0, high = 5"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "0",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "5",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "undefined",
+        "type": "undefined"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "active",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      }
+    ],
+    "recursionTreeEdges": [],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_1",
+    "executionStatus": "running",
+    "depth": 1
+  },
+  {
+    "stepNumber": 1,
+    "currentLine": 4,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:4",
+        "depth": 0,
+        "variables": "low = 0, high = 5"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "0",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "5",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "active",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      }
+    ],
+    "recursionTreeEdges": [],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_1",
+    "executionStatus": "running",
+    "depth": 1
+  },
+  {
+    "stepNumber": 2,
+    "currentLine": 6,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:6",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "0",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "5",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "2",
+        "type": "number"
+      },
+      {
+        "name": "arr[mid]",
+        "value": "5",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "active",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      }
+    ],
+    "recursionTreeEdges": [],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_1",
+    "executionStatus": "running",
+    "depth": 1
+  },
+  {
+    "stepNumber": 3,
+    "currentLine": 9,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:9",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "0",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "5",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "2",
+        "type": "number"
+      },
+      {
+        "name": "arr[mid]",
+        "value": "5",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "active",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      }
+    ],
+    "recursionTreeEdges": [],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_1",
+    "executionStatus": "running",
+    "depth": 1
+  },
+  {
+    "stepNumber": 4,
+    "currentLine": 12,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:12",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2, checking 5 > 7"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "0",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "5",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "2",
+        "type": "number"
+      },
+      {
+        "name": "arr[mid]",
+        "value": "5",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "active",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      }
+    ],
+    "recursionTreeEdges": [],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_1",
+    "executionStatus": "running",
+    "depth": 1
+  },
+  {
+    "stepNumber": 5,
+    "currentLine": 15,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:15",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2, calling bs(3, 5)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "0",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "5",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "2",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "running",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      }
+    ],
+    "recursionTreeEdges": [],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_1",
+    "executionStatus": "running",
+    "depth": 1
+  },
+  {
+    "stepNumber": 6,
+    "currentLine": 2,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 3, 5)",
+        "line": "binarySearch.js:2",
+        "depth": 1,
+        "variables": "low = 3, high = 5"
+      },
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:15",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "5",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "undefined",
+        "type": "undefined"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "running",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      },
+      {
+        "id": "node_2",
+        "label": "mid: 4",
+        "cx": 420,
+        "cy": 140,
+        "status": "active",
+        "depth": 1,
+        "subLabel": "[3, 5]"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_2",
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 7,
+    "currentLine": 6,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 3, 5)",
+        "line": "binarySearch.js:6",
+        "depth": 1,
+        "variables": "low = 3, high = 5, mid = 4"
+      },
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:15",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "5",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "4",
+        "type": "number"
+      },
+      {
+        "name": "arr[mid]",
+        "value": "9",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "running",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      },
+      {
+        "id": "node_2",
+        "label": "mid: 4",
+        "cx": 420,
+        "cy": 140,
+        "status": "active",
+        "depth": 1,
+        "subLabel": "[3, 5]"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_2",
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 8,
+    "currentLine": 9,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 3, 5)",
+        "line": "binarySearch.js:9",
+        "depth": 1,
+        "variables": "low = 3, high = 5, mid = 4"
+      },
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:15",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "5",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "4",
+        "type": "number"
+      },
+      {
+        "name": "arr[mid]",
+        "value": "9",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "running",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      },
+      {
+        "id": "node_2",
+        "label": "mid: 4",
+        "cx": 420,
+        "cy": 140,
+        "status": "active",
+        "depth": 1,
+        "subLabel": "[3, 5]"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_2",
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 9,
+    "currentLine": 12,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 3, 5)",
+        "line": "binarySearch.js:12",
+        "depth": 1,
+        "variables": "low = 3, high = 5, mid = 4, checking 9 > 7"
+      },
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:15",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "5",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "4",
+        "type": "number"
+      },
+      {
+        "name": "arr[mid]",
+        "value": "9",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "running",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      },
+      {
+        "id": "node_2",
+        "label": "mid: 4",
+        "cx": 420,
+        "cy": 140,
+        "status": "active",
+        "depth": 1,
+        "subLabel": "[3, 5]"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_2",
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 10,
+    "currentLine": 13,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 3, 5)",
+        "line": "binarySearch.js:13",
+        "depth": 1,
+        "variables": "low = 3, high = 5, mid = 4, calling bs(3, 3)"
+      },
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:15",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "5",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "4",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "running",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      },
+      {
+        "id": "node_2",
+        "label": "mid: 4",
+        "cx": 420,
+        "cy": 140,
+        "status": "running",
+        "depth": 1,
+        "subLabel": "[3, 5]"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_2",
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 11,
+    "currentLine": 2,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 3, 3)",
+        "line": "binarySearch.js:2",
+        "depth": 2,
+        "variables": "low = 3, high = 3"
+      },
+      {
+        "name": "binarySearch(arr, 7, 3, 5)",
+        "line": "binarySearch.js:13",
+        "depth": 1,
+        "variables": "low = 3, high = 5, mid = 4"
+      },
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:15",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "undefined",
+        "type": "undefined"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "running",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      },
+      {
+        "id": "node_2",
+        "label": "mid: 4",
+        "cx": 420,
+        "cy": 140,
+        "status": "running",
+        "depth": 1,
+        "subLabel": "[3, 5]"
+      },
+      {
+        "id": "node_3",
+        "label": "mid: 3",
+        "cx": 350,
+        "cy": 230,
+        "status": "active",
+        "depth": 2,
+        "subLabel": "[3, 3]"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_3",
+    "executionStatus": "running",
+    "depth": 3
+  },
+  {
+    "stepNumber": 12,
+    "currentLine": 6,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 3, 3)",
+        "line": "binarySearch.js:6",
+        "depth": 2,
+        "variables": "low = 3, high = 3, mid = 3"
+      },
+      {
+        "name": "binarySearch(arr, 7, 3, 5)",
+        "line": "binarySearch.js:13",
+        "depth": 1,
+        "variables": "low = 3, high = 5, mid = 4"
+      },
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:15",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "arr[mid]",
+        "value": "7",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "running",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      },
+      {
+        "id": "node_2",
+        "label": "mid: 4",
+        "cx": 420,
+        "cy": 140,
+        "status": "running",
+        "depth": 1,
+        "subLabel": "[3, 5]"
+      },
+      {
+        "id": "node_3",
+        "label": "mid: 3",
+        "cx": 350,
+        "cy": 230,
+        "status": "active",
+        "depth": 2,
+        "subLabel": "[3, 3]"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_3",
+    "executionStatus": "running",
+    "depth": 3
+  },
+  {
+    "stepNumber": 13,
+    "currentLine": 9,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 3, 3)",
+        "line": "binarySearch.js:9",
+        "depth": 2,
+        "variables": "low = 3, high = 3, mid = 3, target found, returning mid"
+      },
+      {
+        "name": "binarySearch(arr, 7, 3, 5)",
+        "line": "binarySearch.js:13",
+        "depth": 1,
+        "variables": "low = 3, high = 5, mid = 4"
+      },
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:15",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "low",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "high",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "mid",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "arr[mid]",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "3",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "running",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      },
+      {
+        "id": "node_2",
+        "label": "mid: 4",
+        "cx": 420,
+        "cy": 140,
+        "status": "running",
+        "depth": 1,
+        "subLabel": "[3, 5]"
+      },
+      {
+        "id": "node_3",
+        "label": "mid: 3",
+        "cx": 350,
+        "cy": 230,
+        "status": "success",
+        "depth": 2,
+        "subLabel": "[3, 3]"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_3",
+    "returnValue": 3,
+    "executionStatus": "running",
+    "depth": 3
+  },
+  {
+    "stepNumber": 14,
+    "currentLine": 13,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 3, 5)",
+        "line": "binarySearch.js:13",
+        "depth": 1,
+        "variables": "low = 3, high = 5, mid = 4, bs(3,3) returned 3"
+      },
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:15",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "3",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "running",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      },
+      {
+        "id": "node_2",
+        "label": "mid: 4",
+        "cx": 420,
+        "cy": 140,
+        "status": "success",
+        "depth": 1,
+        "subLabel": "[3, 5]"
+      },
+      {
+        "id": "node_3",
+        "label": "mid: 3",
+        "cx": 350,
+        "cy": 230,
+        "status": "success",
+        "depth": 2,
+        "subLabel": "[3, 3]"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_2",
+    "returnValue": 3,
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 15,
+    "currentLine": 15,
+    "callStack": [
+      {
+        "name": "binarySearch(arr, 7, 0, 5)",
+        "line": "binarySearch.js:15",
+        "depth": 0,
+        "variables": "low = 0, high = 5, mid = 2, bs(3,5) returned 3"
+      }
+    ],
+    "variables": [
+      {
+        "name": "arr",
+        "value": "[1, 3, 5, 7, 9, 11]",
+        "type": "Array(6)"
+      },
+      {
+        "name": "target",
+        "value": "7",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "3",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "mid: 2",
+        "cx": 300,
+        "cy": 50,
+        "status": "success",
+        "depth": 0,
+        "subLabel": "[0, 5]"
+      },
+      {
+        "id": "node_2",
+        "label": "mid: 4",
+        "cx": 420,
+        "cy": 140,
+        "status": "success",
+        "depth": 1,
+        "subLabel": "[3, 5]"
+      },
+      {
+        "id": "node_3",
+        "label": "mid: 3",
+        "cx": 350,
+        "cy": 230,
+        "status": "success",
+        "depth": 2,
+        "subLabel": "[3, 3]"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "binarySearch",
+    "activeNodeId": "node_1",
+    "returnValue": 3,
+    "executionStatus": "completed",
+    "depth": 1
+  }
+]

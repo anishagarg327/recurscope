@@ -5,29 +5,20 @@ import {
   Moon,
   Play
 } from 'lucide-react';
-import { useExecution } from '../context/ExecutionContext';
+import { useAlgorithms } from '../contexts/AlgorithmsContext';
+import { useExecution } from '../contexts/ExecutionContext';
+import { usePlayback } from '../contexts/PlaybackContext';
 
 export default function Navbar() {
-  const {
-    currentAlgorithm,
-    setAlgorithm,
-    isPlaying,
-    currentSnapshot,
-    factorialInput,
-    runAlgorithm
-  } = useExecution();
+  const { selectedAlgorithmId, allAlgorithms, selectAlgorithm } = useAlgorithms();
+  const { factorialInput, runAlgorithm } = useExecution();
+  const { currentSnapshot, isPlaying } = usePlayback();
 
   const [localInput, setLocalInput] = useState(factorialInput);
 
   useEffect(() => {
     setLocalInput(factorialInput);
   }, [factorialInput]);
-
-  const algorithms = [
-    { id: 'factorial', name: 'Factorial (N!)' },
-    { id: 'fibonacci', name: 'Fibonacci Sequence' },
-    { id: 'binarySearch', name: 'Binary Search' }
-  ];
 
   const getStatusDetails = (status) => {
     switch (status) {
@@ -63,11 +54,11 @@ export default function Navbar() {
           <label className="dropdown-label">Algorithm</label>
           <div className="dropdown-select-wrapper">
             <select 
-              value={currentAlgorithm} 
-              onChange={(e) => setAlgorithm(e.target.value)}
+              value={selectedAlgorithmId} 
+              onChange={(e) => selectAlgorithm(e.target.value)}
               className="dropdown-select"
             >
-              {algorithms.map((algo) => (
+              {allAlgorithms.map((algo) => (
                 <option key={algo.id} value={algo.id}>
                   {algo.name}
                 </option>
@@ -77,7 +68,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {currentAlgorithm === 'factorial' && (
+        {selectedAlgorithmId === 'factorial' && (
           <div className="navbar-run-control" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
             <div className="navbar-divider" style={{ height: '20px', margin: '0' }}></div>
             <div className="input-container" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>

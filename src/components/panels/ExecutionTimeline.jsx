@@ -1,38 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
-  Sliders, 
-  Clock, 
   Play, 
   Pause, 
+  RotateCcw, 
   SkipBack, 
-  SkipForward,
-  BarChart3,
-  Square,
-  RotateCcw
+  SkipForward, 
+  Square, 
+  Clock, 
+  BarChart3, 
+  Sliders,
+  Bookmark
 } from 'lucide-react';
-import { useExecution } from '../context/ExecutionContext';
+import { usePlayback } from '../../contexts/PlaybackContext';
+import { useExecution } from '../../contexts/ExecutionContext';
+import { useAlgorithms } from '../../contexts/AlgorithmsContext';
+import { useSettings } from '../../contexts/SettingsContext';
+import { getTypeColorClass } from '../../core/execution/types';
 
-export default function ExecutionTimeline({ showStats, onToggleStats }) {
-  const {
-    currentAlgorithm,
-    snapshots,
-    currentSnapshotIndex,
-    currentSnapshot,
-    goToStep,
-    playbackSpeed,
-    setSpeed,
-    isPlaying,
-    nextStep,
-    prevStep,
-    togglePlay,
-    stop,
-    restart
-  } = useExecution();
+export default function ExecutionTimeline() {
+  const { 
+    currentStepIndex, 
+    currentSnapshot, 
+    isPlaying, 
+    playbackSpeed, 
+    bookmarks,
+    nextStep, 
+    prevStep, 
+    goToStep, 
+    togglePlay, 
+    stop, 
+    restart, 
+    setSpeed, 
+    toggleBookmark 
+  } = usePlayback();
+
+  const { snapshots } = useExecution();
+  const { activeAlgorithm } = useAlgorithms();
+  const { showStats, toggleStats } = useSettings();
+
+  const [hoverIndex, setHoverIndex] = useState(null);
 
   const totalSteps = snapshots.length - 1;
-  const currentStep = currentSnapshotIndex;
-  
-  // Calculate percentage progress
+  const currentStep = currentStepIndex;
   const progressPercentRaw = totalSteps > 0 ? (currentStep / totalSteps) * 100 : 0;
   const progressPercent = Math.round(progressPercentRaw);
 
@@ -40,62 +49,39 @@ export default function ExecutionTimeline({ showStats, onToggleStats }) {
     const rect = e.currentTarget.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const width = rect.width;
-    if (width > 0) {
-      const ratio = Math.max(0, Math.min(1, clickX / width));
-      const targetStep = Math.round(ratio * totalSteps);
-      goToStep(targetStep);
-    }
+    const ratio = Math.max(0, Math.min(1, clickX / width));
+    const step = Math.round(ratio * totalSteps);
+    goToStep(step);
   };
 
-  // Dynamic breakpoint description based on current snapshot and line
-  const activeLine = currentSnapshot?.currentLine || 2;
   const getBreakpointDescription = () => {
-    if (currentAlgorithm === 'factorial') {
-      if (activeLine === 2) return `Line 2: function factorial(n)`;
-      if (activeLine === 4) return `Line 4: if (n <= 1)`;
-      if (activeLine === 5) return `Line 5: return 1`;
-      if (activeLine === 9) return `Line 9: return n * factorial(n - 1)`;
-    } else if (currentAlgorithm === 'fibonacci') {
-      if (activeLine === 2) return `Line 2: function fib(n)`;
-      if (activeLine === 4) return `Line 4: if (n <= 0) return 0`;
-      if (activeLine === 5) return `Line 5: if (n === 1) return 1`;
-      if (activeLine === 8) return `Line 8: return fib(n - 1) + fib(n - 2)`;
-    } else if (currentAlgorithm === 'binarySearch') {
-      const vars = currentSnapshot?.variables || [];
-      const low = vars.find(v => v.name === 'low')?.value;
-      const high = vars.find(v => v.name === 'high')?.value;
-      
-      if (activeLine === 2) return `Line 2: function BS [low=${low}, high=${high}]`;
-      if (activeLine === 4) return `Line 4: if (low > high)`;
-      if (activeLine === 6) return `Line 6: const mid`;
-      if (activeLine === 9) return `Line 9: if (arr[mid] === target)`;
-      if (activeLine === 12) return `Line 12: if (arr[mid] > target)`;
-      if (activeLine === 13) return `Line 13: return BS(left)`;
-      if (activeLine === 15) return `Line 15: return BS(right)`;
-    }
-    return `Line ${activeLine}`;
+    const activeLine = currentSnapshot?.currentLine || 1;
+    if (!activeAlgorithm?.sourceCode) return `Line ${activeLine}`;
+    const lines = activeAlgorithm.sourceCode.split('\n');
+    const lineText = lines[activeLine - 1] || '';
+    return `Line ${activeLine}: ${lineText.trim()}`;
   };
 
   return (
-    <div className="panel timeline-panel">
+    <div className="panel timeline-panel" style={{ position: 'relative' }}>
       <div className="panel-header">
         <div className="panel-title">
           <Sliders size={14} className="panel-title-icon" />
           <span>Playback Timeline</span>
         </div>
         <div className="timeline-meta" style={{ gap: 'var(--space-md)' }}>
-          <span className="timeline-step-badge">Step {currentStep} of {totalSteps}</span>
+          <span className="timeline-step-badge">Step {currentStep} of {totalSteps >= 0 ? totalSteps : 0}</span>
           <span className="timeline-percent-badge">{progressPercent}%</span>
         </div>
       </div>
       
-      <div className="panel-body timeline-body" style={{ gap: 'var(--space-sm)' }}>
+      <div className="panel-body timeline-body" style={{ gap: 'var(--space-sm)', position: 'relative' }}>
         {/* Track Slider Bar */}
-        <div className="timeline-container">
+        <div className="timeline-container" style={{ position: 'relative' }}>
           <div 
             className="timeline-track-wrapper" 
             onClick={handleTrackClick}
-            style={{ cursor: 'pointer', padding: '8px 0' }}
+            style={{ cursor: 'pointer', padding: '8px 0', position: 'relative' }}
           >
             <div 
               className="timeline-progress-fill"
@@ -110,18 +96,55 @@ export default function ExecutionTimeline({ showStats, onToggleStats }) {
               <div className="playhead-inner"></div>
             </div>
 
-            {Array.from({ length: totalSteps + 1 }).map((_, i) => {
+            {/* Hover preview card popup */}
+            {hoverIndex !== null && snapshots[hoverIndex] && (
+              <div 
+                className="timeline-hover-tooltip"
+                style={{
+                  position: 'absolute',
+                  bottom: '30px',
+                  left: `${totalSteps > 0 ? (hoverIndex / totalSteps) * 100 : 0}%`,
+                  transform: 'translateX(-50%)',
+                  backgroundColor: 'var(--bg-panel-header)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: 'var(--radius-xs)',
+                  padding: 'var(--space-xs) var(--space-sm)',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.6)',
+                  zIndex: 100,
+                  pointerEvents: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '2px',
+                  minWidth: '160px'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', fontWeight: 'bold', color: 'var(--text-muted)' }}>
+                  <span>STEP {hoverIndex}</span>
+                  <span className={`badge-text badge-${snapshots[hoverIndex]?.event?.toLowerCase()}`}>
+                    {snapshots[hoverIndex]?.event}
+                  </span>
+                </div>
+                <div style={{ fontSize: '10px', fontWeight: '600', color: 'var(--text-primary)', marginTop: '2px' }}>
+                  {snapshots[hoverIndex]?.statusMessage}
+                </div>
+              </div>
+            )}
+
+            {snapshots.map((snap, i) => {
               const tickPos = totalSteps > 0 ? (i / totalSteps) * 100 : 0;
               const isPassed = i <= currentStep;
+              const isBookmarked = bookmarks.includes(i);
               return (
                 <div 
                   key={i} 
-                  className={`timeline-tick ${isPassed ? 'passed' : ''}`}
+                  className={`timeline-tick ${isPassed ? 'passed' : ''} ${isBookmarked ? 'bookmarked' : ''}`}
                   style={{ left: `${tickPos}%`, top: '5px' }}
                   onClick={(e) => {
                     e.stopPropagation();
                     goToStep(i);
                   }}
+                  onMouseEnter={() => setHoverIndex(i)}
+                  onMouseLeave={() => setHoverIndex(null)}
                   title={`Step ${i}`}
                 >
                   <span className="tick-label">{i}</span>
@@ -134,9 +157,11 @@ export default function ExecutionTimeline({ showStats, onToggleStats }) {
         {/* Player Buttons & Metadata Controls */}
         <div className="timeline-controls-footer" style={{ marginTop: 'var(--space-sm)', alignItems: 'center' }}>
           <div className="footer-left" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 'var(--space-md)', overflow: 'hidden' }}>
-            <span className={`event-badge badge-${currentSnapshot?.eventType?.toLowerCase().replace('_', '-')}`}>
-              {currentSnapshot?.eventType}
-            </span>
+            {currentSnapshot && (
+              <span className={`event-badge ${getTypeColorClass(currentSnapshot.event)}`}>
+                {currentSnapshot.event}
+              </span>
+            )}
             <span className="status-message-text" style={{ fontWeight: '600', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>
               {currentSnapshot?.statusMessage}
             </span>
@@ -188,6 +213,15 @@ export default function ExecutionTimeline({ showStats, onToggleStats }) {
             >
               <SkipForward size={14} />
             </button>
+
+            <button 
+              className={`player-btn ${bookmarks.includes(currentStepIndex) ? 'bookmark-active' : ''}`}
+              onClick={() => toggleBookmark(currentStepIndex)}
+              title="Toggle Bookmark"
+              style={{ color: bookmarks.includes(currentStepIndex) ? 'var(--accent)' : 'inherit' }}
+            >
+              <Bookmark size={13} fill={bookmarks.includes(currentStepIndex) ? "currentColor" : "none"} />
+            </button>
           </div>
 
           {/* Right speed select & statistics toggle */}
@@ -213,7 +247,7 @@ export default function ExecutionTimeline({ showStats, onToggleStats }) {
 
             <button 
               className={`stats-toggle-btn ${showStats ? 'active' : ''}`}
-              onClick={onToggleStats}
+              onClick={toggleStats}
               title={showStats ? "Hide Statistics" : "Show Statistics"}
             >
               <BarChart3 size={14} />

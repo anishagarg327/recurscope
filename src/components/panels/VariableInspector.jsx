@@ -1,10 +1,12 @@
 import React from 'react';
 import { Eye, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useExecution } from '../context/ExecutionContext';
+import { usePlayback } from '../../contexts/PlaybackContext';
+import { useExecution } from '../../contexts/ExecutionContext';
 
 export default function VariableInspector() {
-  const { currentSnapshot, currentSnapshotIndex, snapshots } = useExecution();
+  const { currentSnapshot, currentStepIndex } = usePlayback();
+  const { snapshots } = useExecution();
   const vars = currentSnapshot?.variables || [];
 
   const getTypeColor = (type) => {
@@ -15,18 +17,15 @@ export default function VariableInspector() {
   };
 
   const isVariableChanged = (name, value) => {
-    if (currentSnapshotIndex === 0) return false;
-    const prevSnapshot = snapshots[currentSnapshotIndex - 1];
+    if (currentStepIndex === 0) return false;
+    const prevSnapshot = snapshots[currentStepIndex - 1];
     const prevVars = prevSnapshot?.variables || [];
     const prevVar = prevVars.find(v => v.name === name);
     return prevVar ? prevVar.value !== value : true;
   };
 
-  // Dynamically compute a mock "Last Updated" info string for UX aesthetics
   const getLastUpdated = (name) => {
-    if (currentSnapshotIndex === 0) return 'Initialized';
-    
-    // Custom mock rules based on variable name to simulate real debugger tracking
+    if (currentStepIndex === 0) return 'Initialized';
     if (name === 'returnValue' || name === 'result' || name === 'arr[mid]') {
       return 'Updated just now';
     }
@@ -46,7 +45,7 @@ export default function VariableInspector() {
           <Eye size={14} className="panel-title-icon" />
           <span>Variable Inspector</span>
         </div>
-        <span className="inspector-scope-badge">Cards View</span>
+        <span className="inspector-scope-badge">Local Scope</span>
       </div>
       
       <div className="panel-body inspector-body" style={{ padding: 'var(--space-md)' }}>

@@ -1,0 +1,1898 @@
+[
+  {
+    "stepNumber": 0,
+    "currentLine": 2,
+    "callStack": [
+      {
+        "name": "fib(4)",
+        "line": "fib.js:2",
+        "depth": 0,
+        "variables": "n = 4"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "4",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "active",
+        "depth": 0
+      }
+    ],
+    "recursionTreeEdges": [],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_1",
+    "executionStatus": "running",
+    "depth": 1
+  },
+  {
+    "stepNumber": 1,
+    "currentLine": 4,
+    "callStack": [
+      {
+        "name": "fib(4)",
+        "line": "fib.js:4",
+        "depth": 0,
+        "variables": "n = 4"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "4",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "active",
+        "depth": 0
+      }
+    ],
+    "recursionTreeEdges": [],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_1",
+    "executionStatus": "running",
+    "depth": 1
+  },
+  {
+    "stepNumber": 2,
+    "currentLine": 8,
+    "callStack": [
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "4",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      }
+    ],
+    "recursionTreeEdges": [],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_1",
+    "executionStatus": "running",
+    "depth": 1
+  },
+  {
+    "stepNumber": 3,
+    "currentLine": 2,
+    "callStack": [
+      {
+        "name": "fib(3)",
+        "line": "fib.js:2",
+        "depth": 1,
+        "variables": "n = 3"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "3",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "active",
+        "depth": 1
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_2",
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 4,
+    "currentLine": 8,
+    "callStack": [
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, evaluating fib(2)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "3",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_2",
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 5,
+    "currentLine": 2,
+    "callStack": [
+      {
+        "name": "fib(2)",
+        "line": "fib.js:2",
+        "depth": 2,
+        "variables": "n = 2"
+      },
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, evaluating fib(2)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "2",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "active",
+        "depth": 2
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_3",
+    "executionStatus": "running",
+    "depth": 3
+  },
+  {
+    "stepNumber": 6,
+    "currentLine": 8,
+    "callStack": [
+      {
+        "name": "fib(2)",
+        "line": "fib.js:8",
+        "depth": 2,
+        "variables": "n = 2, evaluating fib(1)"
+      },
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, evaluating fib(2)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "2",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "running",
+        "depth": 2
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_3",
+    "executionStatus": "running",
+    "depth": 3
+  },
+  {
+    "stepNumber": 7,
+    "currentLine": 2,
+    "callStack": [
+      {
+        "name": "fib(1)",
+        "line": "fib.js:2",
+        "depth": 3,
+        "variables": "n = 1"
+      },
+      {
+        "name": "fib(2)",
+        "line": "fib.js:8",
+        "depth": 2,
+        "variables": "n = 2, evaluating fib(1)"
+      },
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, evaluating fib(2)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "running",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "active",
+        "depth": 3
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_4",
+    "executionStatus": "running",
+    "depth": 4
+  },
+  {
+    "stepNumber": 8,
+    "currentLine": 5,
+    "callStack": [
+      {
+        "name": "fib(1)",
+        "line": "fib.js:5",
+        "depth": 3,
+        "variables": "n = 1, returning 1"
+      },
+      {
+        "name": "fib(2)",
+        "line": "fib.js:8",
+        "depth": 2,
+        "variables": "n = 2, evaluating fib(1)"
+      },
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, evaluating fib(2)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "1",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "running",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_4",
+    "returnValue": 1,
+    "executionStatus": "running",
+    "depth": 4
+  },
+  {
+    "stepNumber": 9,
+    "currentLine": 8,
+    "callStack": [
+      {
+        "name": "fib(2)",
+        "line": "fib.js:8",
+        "depth": 2,
+        "variables": "n = 2, fib(1) = 1, evaluating fib(0)"
+      },
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, evaluating fib(2)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "2",
+        "type": "number"
+      },
+      {
+        "name": "fib(1)",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "running",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_3",
+    "executionStatus": "running",
+    "depth": 3
+  },
+  {
+    "stepNumber": 10,
+    "currentLine": 2,
+    "callStack": [
+      {
+        "name": "fib(0)",
+        "line": "fib.js:2",
+        "depth": 3,
+        "variables": "n = 0"
+      },
+      {
+        "name": "fib(2)",
+        "line": "fib.js:8",
+        "depth": 2,
+        "variables": "n = 2, fib(1) = 1, evaluating fib(0)"
+      },
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, evaluating fib(2)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "0",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "running",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_5",
+        "label": "f(0)",
+        "cx": 140,
+        "cy": 230,
+        "status": "active",
+        "depth": 3
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_5",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_5",
+    "executionStatus": "running",
+    "depth": 4
+  },
+  {
+    "stepNumber": 11,
+    "currentLine": 4,
+    "callStack": [
+      {
+        "name": "fib(0)",
+        "line": "fib.js:4",
+        "depth": 3,
+        "variables": "n = 0, returning 0"
+      },
+      {
+        "name": "fib(2)",
+        "line": "fib.js:8",
+        "depth": 2,
+        "variables": "n = 2, fib(1) = 1, evaluating fib(0)"
+      },
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, evaluating fib(2)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "0",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "0",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "running",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_5",
+        "label": "f(0)",
+        "cx": 140,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_5",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_5",
+    "returnValue": 0,
+    "executionStatus": "running",
+    "depth": 4
+  },
+  {
+    "stepNumber": 12,
+    "currentLine": 8,
+    "callStack": [
+      {
+        "name": "fib(2)",
+        "line": "fib.js:8",
+        "depth": 2,
+        "variables": "n = 2, f(1) = 1, f(0) = 0, returning 1"
+      },
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, evaluating fib(2)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "2",
+        "type": "number"
+      },
+      {
+        "name": "fib(1)",
+        "value": "1",
+        "type": "number"
+      },
+      {
+        "name": "fib(0)",
+        "value": "0",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_5",
+        "label": "f(0)",
+        "cx": 140,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_5",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_3",
+    "returnValue": 1,
+    "executionStatus": "running",
+    "depth": 3
+  },
+  {
+    "stepNumber": 13,
+    "currentLine": 8,
+    "callStack": [
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, f(2) = 1, evaluating fib(1)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "fib(2) return",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_5",
+        "label": "f(0)",
+        "cx": 140,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_5",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_2",
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 14,
+    "currentLine": 2,
+    "callStack": [
+      {
+        "name": "fib(1)",
+        "line": "fib.js:2",
+        "depth": 2,
+        "variables": "n = 1"
+      },
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, f(2) = 1, evaluating fib(1)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_5",
+        "label": "f(0)",
+        "cx": 140,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_6",
+        "label": "f(1)",
+        "cx": 260,
+        "cy": 160,
+        "status": "active",
+        "depth": 2
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_5",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_6",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_6",
+    "executionStatus": "running",
+    "depth": 3
+  },
+  {
+    "stepNumber": 15,
+    "currentLine": 5,
+    "callStack": [
+      {
+        "name": "fib(1)",
+        "line": "fib.js:5",
+        "depth": 2,
+        "variables": "n = 1, returning 1"
+      },
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, f(2) = 1, evaluating fib(1)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "1",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "running",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_5",
+        "label": "f(0)",
+        "cx": 140,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_6",
+        "label": "f(1)",
+        "cx": 260,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_5",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_6",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_6",
+    "returnValue": 1,
+    "executionStatus": "running",
+    "depth": 3
+  },
+  {
+    "stepNumber": 16,
+    "currentLine": 8,
+    "callStack": [
+      {
+        "name": "fib(3)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 3, f(2) = 1, f(1) = 1, returning 2"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, evaluating fib(3)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "fib(2)",
+        "value": "1",
+        "type": "number"
+      },
+      {
+        "name": "fib(1)",
+        "value": "1",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "2",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "success",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_5",
+        "label": "f(0)",
+        "cx": 140,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_6",
+        "label": "f(1)",
+        "cx": 260,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_5",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_6",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_2",
+    "returnValue": 2,
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 17,
+    "currentLine": 8,
+    "callStack": [
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, f(3) = 2, evaluating fib(2)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "4",
+        "type": "number"
+      },
+      {
+        "name": "fib(3) return",
+        "value": "2",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "success",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_5",
+        "label": "f(0)",
+        "cx": 140,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_6",
+        "label": "f(1)",
+        "cx": 260,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_5",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_6",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_1",
+    "executionStatus": "running",
+    "depth": 1
+  },
+  {
+    "stepNumber": 18,
+    "currentLine": 2,
+    "callStack": [
+      {
+        "name": "fib(2)",
+        "line": "fib.js:2",
+        "depth": 1,
+        "variables": "n = 2"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, f(3) = 2, evaluating fib(2)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "2",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "success",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_5",
+        "label": "f(0)",
+        "cx": 140,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_6",
+        "label": "f(1)",
+        "cx": 260,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_7",
+        "label": "f(2)",
+        "cx": 420,
+        "cy": 100,
+        "status": "active",
+        "depth": 1
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_5",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_6",
+        "status": "success"
+      },
+      {
+        "from": "node_1",
+        "to": "node_7",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_7",
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 19,
+    "currentLine": 8,
+    "callStack": [
+      {
+        "name": "fib(2)",
+        "line": "fib.js:8",
+        "depth": 1,
+        "variables": "n = 2, returning 1 (pre-evaluated)"
+      },
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, f(3) = 2, evaluating fib(2)"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "2",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "running",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "success",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_5",
+        "label": "f(0)",
+        "cx": 140,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_6",
+        "label": "f(1)",
+        "cx": 260,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_7",
+        "label": "f(2)",
+        "cx": 420,
+        "cy": 100,
+        "status": "success",
+        "depth": 1
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_5",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_6",
+        "status": "success"
+      },
+      {
+        "from": "node_1",
+        "to": "node_7",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_7",
+    "returnValue": 1,
+    "executionStatus": "running",
+    "depth": 2
+  },
+  {
+    "stepNumber": 20,
+    "currentLine": 8,
+    "callStack": [
+      {
+        "name": "fib(4)",
+        "line": "fib.js:8",
+        "depth": 0,
+        "variables": "n = 4, f(3) = 2, f(2) = 1, returning 3"
+      }
+    ],
+    "variables": [
+      {
+        "name": "n",
+        "value": "4",
+        "type": "number"
+      },
+      {
+        "name": "fib(3)",
+        "value": "2",
+        "type": "number"
+      },
+      {
+        "name": "fib(2)",
+        "value": "1",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "3",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "f(4)",
+        "cx": 300,
+        "cy": 40,
+        "status": "success",
+        "depth": 0
+      },
+      {
+        "id": "node_2",
+        "label": "f(3)",
+        "cx": 180,
+        "cy": 100,
+        "status": "success",
+        "depth": 1
+      },
+      {
+        "id": "node_3",
+        "label": "f(2)",
+        "cx": 100,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_4",
+        "label": "f(1)",
+        "cx": 60,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_5",
+        "label": "f(0)",
+        "cx": 140,
+        "cy": 230,
+        "status": "success",
+        "depth": 3
+      },
+      {
+        "id": "node_6",
+        "label": "f(1)",
+        "cx": 260,
+        "cy": 160,
+        "status": "success",
+        "depth": 2
+      },
+      {
+        "id": "node_7",
+        "label": "f(2)",
+        "cx": 420,
+        "cy": 100,
+        "status": "success",
+        "depth": 1
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_3",
+        "to": "node_5",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_6",
+        "status": "success"
+      },
+      {
+        "from": "node_1",
+        "to": "node_7",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "fibonacci",
+    "activeNodeId": "node_1",
+    "returnValue": 3,
+    "executionStatus": "completed",
+    "depth": 1
+  }
+]
