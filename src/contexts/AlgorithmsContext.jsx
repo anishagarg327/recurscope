@@ -4,7 +4,7 @@ import registry from '../core/services/AlgorithmRegistry';
 const AlgorithmsContext = createContext(null);
 
 export const AlgorithmsProvider = ({ children }) => {
-  const [selectedAlgorithmId, setSelectedAlgorithmId] = useState('factorial');
+  const [selectedAlgorithmId, setSelectedAlgorithmId] = useState('fibonacci');
 
   const activeAlgorithm = useMemo(() => {
     return registry.get(selectedAlgorithmId);

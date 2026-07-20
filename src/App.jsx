@@ -1,24 +1,46 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
-import CodeEditor from './components/panels/CodeEditor';
-import CallStack from './components/panels/CallStack';
-import VariableInspector from './components/panels/VariableInspector';
-import RecursionTree from './components/panels/RecursionTree';
-import ExecutionDetails from './components/panels/ExecutionDetails';
-import Statistics from './components/panels/Statistics';
-import ExecutionTimeline from './components/panels/ExecutionTimeline';
+import Playground from './pages/Playground';
 import { SettingsProvider, useSettings } from './contexts/SettingsContext';
 import { AlgorithmsProvider } from './contexts/AlgorithmsContext';
 import { ExecutionProvider } from './contexts/ExecutionContext';
 import { PlaybackProvider } from './contexts/PlaybackContext';
+import { NavigationProvider, useNavigation } from './contexts/NavigationContext';
 import './App.css';
 
-function MainLayout() {
-  const { showStats } = useSettings();
+// Lazy load other pages to keep the initial bundle clean (optional, but good practice).
+// For now, we will import them normally as they are created.
+import Algorithms from './pages/Algorithms';
+import Examples from './pages/Examples';
+import Theory from './pages/Theory';
+import ReplaySessions from './pages/ReplaySessions';
+import Settings from './pages/Settings';
+
+function PageRouter() {
+  const { currentPage } = useNavigation();
 
   return (
-    <div className="app-wrapper">
+    <div className="main-content" style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
+      {/* Playground is always mounted to preserve localized states like Canvas Pan/Zoom */}
+      <div style={{ display: currentPage === 'Playground' ? 'block' : 'none', height: '100%' }}>
+        <Playground />
+      </div>
+
+      {currentPage === 'Algorithms' && <Algorithms />}
+      {currentPage === 'Examples' && <Examples />}
+      {currentPage === 'Theory' && <Theory />}
+      {currentPage === 'Replay Sessions' && <ReplaySessions />}
+      {currentPage === 'Settings' && <Settings />}
+    </div>
+  );
+}
+
+function MainLayout() {
+  const { theme } = useSettings();
+
+  return (
+    <div className={`app-wrapper ${theme === 'light' ? 'light-theme' : ''}`}>
       {/* Top Navbar */}
       <Navbar />
 
@@ -27,46 +49,8 @@ function MainLayout() {
         {/* Left Navigation Sidebar */}
         <Sidebar />
 
-        {/* Central & Right Columns Workspace Container */}
-        <div className="workspace-container">
-          {/* Main Grid Panels Area */}
-          <div className="workspace-content">
-            {/* Left Column: Code Editor & Variable Inspector */}
-            <div className="workspace-col-left">
-              <CodeEditor />
-              <div className="resizer-v"></div>
-              <VariableInspector />
-            </div>
-
-            <div className="resizer-h"></div>
-
-            {/* Center Column: Recursion Tree Canvas */}
-            <div className="workspace-col-center">
-              <RecursionTree />
-            </div>
-
-            <div className="resizer-h"></div>
-
-            {/* Right Column: Call Stack & Execution Details */}
-            <div className="workspace-col-right">
-              <CallStack />
-              <div className="resizer-v"></div>
-              <ExecutionDetails />
-            </div>
-          </div>
-
-          {/* Collapsible Stats Bottom Drawer */}
-          <div className={`stats-drawer-container ${showStats ? 'expanded' : 'collapsed'}`}>
-            <div className="stats-drawer-content">
-              <Statistics />
-            </div>
-          </div>
-
-          {/* Bottom Row: Execution Timeline controls */}
-          <div className="timeline-row">
-            <ExecutionTimeline />
-          </div>
-        </div>
+        {/* Central Router Area */}
+        <PageRouter />
       </div>
     </div>
   );
@@ -75,13 +59,15 @@ function MainLayout() {
 function App() {
   return (
     <SettingsProvider>
-      <AlgorithmsProvider>
-        <ExecutionProvider>
-          <PlaybackProvider>
-            <MainLayout />
-          </PlaybackProvider>
-        </ExecutionProvider>
-      </AlgorithmsProvider>
+      <NavigationProvider>
+        <AlgorithmsProvider>
+          <ExecutionProvider>
+            <PlaybackProvider>
+              <MainLayout />
+            </PlaybackProvider>
+          </ExecutionProvider>
+        </AlgorithmsProvider>
+      </NavigationProvider>
     </SettingsProvider>
   );
 }

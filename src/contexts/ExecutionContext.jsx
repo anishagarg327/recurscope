@@ -29,12 +29,39 @@ export const ExecutionProvider = ({ children }) => {
     setSnapshots(session);
   }, [selectedAlgorithmId, activeAlgorithm, generateSession]);
 
+  const triggerExecution = useCallback((algoId, args) => {
+    // Force the UI to show this algorithm
+    // (Note: selectAlgorithm comes from AlgorithmsContext)
+    // But we need to import registry to run it immediately without waiting for React state flush
+    import('../core/services/AlgorithmRegistry').then(({ default: registry }) => {
+      const algo = registry.get(algoId);
+      if (algo) {
+        const session = algo.run(...args);
+        setSnapshots(session);
+        // Also save to history!
+        try {
+          const saved = JSON.parse(localStorage.getItem('recurscope_sessions') || '[]');
+          const newSession = {
+            id: Date.now().toString(),
+            algo: algoId,
+            args: args,
+            date: new Date().toISOString(),
+            steps: session.length,
+            maxDepth: Math.max(...session.map(s => s.depth || 0))
+          };
+          localStorage.setItem('recurscope_sessions', JSON.stringify([newSession, ...saved]));
+        } catch (e) {}
+      }
+    });
+  }, []);
+
   return (
     <ExecutionContext.Provider
       value={{
         snapshots,
         factorialInput,
-        runAlgorithm
+        runAlgorithm,
+        triggerExecution
       }}
     >
       {children}

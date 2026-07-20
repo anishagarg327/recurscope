@@ -30,6 +30,27 @@
   --color-info: #0ea5e9;
   --color-info-bg: rgba(14, 165, 233, 0.12);
 
+  --text-inverse: #fff;
+  --bg-highlight: rgba(99, 102, 241, 0.08);
+  --bg-type-number: rgba(14, 165, 233, 0.1);
+  --bg-type-boolean: rgba(245, 158, 11, 0.1);
+  --bg-type-array: rgba(168, 85, 247, 0.1);
+  --border-type-number: rgba(14, 165, 233, 0.2);
+  --border-type-boolean: rgba(245, 158, 11, 0.2);
+  --border-type-array: rgba(168, 85, 247, 0.2);
+  --border-color-success: rgba(16, 185, 129, 0.2);
+  --border-color-info: rgba(14, 165, 233, 0.2);
+  --border-color-warning: rgba(245, 158, 11, 0.2);
+  --bg-canvas: rgba(5, 6, 8, 0.25);
+  --bg-frame-number: rgba(255, 255, 255, 0.04);
+  --border-frame-var: rgba(255, 255, 255, 0.03);
+  --bg-stat-card: rgba(255, 255, 255, 0.015);
+  --bg-stat-muted: rgba(255, 255, 255, 0.04);
+  --bg-timeline-track: rgba(255, 255, 255, 0.06);
+  --border-timeline-tick: rgba(255, 255, 255, 0.15);
+  --syntax-keyword: #ff7b72;
+  --syntax-number: #79c0ff;
+
   /* Fonts */
   --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -53,6 +74,45 @@
   --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.8);
   --glass-bg: rgba(18, 20, 26, 0.65);
   --glass-backdrop: blur(16px);
+}
+
+.light-theme {
+  --bg-app: #f8fafc;
+  --bg-sidebar: #f1f5f9;
+  --bg-panel: #ffffff;
+  --bg-panel-header: #f1f5f9;
+  --bg-panel-hover: #f8fafc;
+  
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-color-hover: rgba(0, 0, 0, 0.15);
+  --border-active: rgba(99, 102, 241, 0.4);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  
+  --glass-bg: rgba(255, 255, 255, 0.65);
+
+  --text-inverse: #fff;
+  --bg-highlight: rgba(99, 102, 241, 0.15);
+  --bg-type-number: rgba(14, 165, 233, 0.15);
+  --bg-type-boolean: rgba(245, 158, 11, 0.15);
+  --bg-type-array: rgba(168, 85, 247, 0.15);
+  --border-type-number: rgba(14, 165, 233, 0.3);
+  --border-type-boolean: rgba(245, 158, 11, 0.3);
+  --border-type-array: rgba(168, 85, 247, 0.3);
+  --border-color-success: rgba(16, 185, 129, 0.3);
+  --border-color-info: rgba(14, 165, 233, 0.3);
+  --border-color-warning: rgba(245, 158, 11, 0.3);
+  --bg-canvas: rgba(240, 242, 245, 0.6);
+  --bg-frame-number: rgba(0, 0, 0, 0.06);
+  --border-frame-var: rgba(0, 0, 0, 0.06);
+  --bg-stat-card: #f8fafc;
+  --bg-stat-muted: rgba(0, 0, 0, 0.04);
+  --bg-timeline-track: rgba(0, 0, 0, 0.06);
+  --border-timeline-tick: rgba(0, 0, 0, 0.15);
+  --syntax-keyword: #d73a49;
+  --syntax-number: #005cc5;
 }
 
 /* Reset & Base Rules */

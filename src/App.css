@@ -86,7 +86,7 @@
   align-items: center;
   gap: var(--space-sm);
   padding: 0 var(--space-xl) var(--space-xl) var(--space-xl);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border-color);
   margin-bottom: var(--space-lg);
 }
 
@@ -147,7 +147,7 @@
 
 .sidebar-footer {
   padding: 0 var(--space-lg);
-  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-top: 1px solid var(--border-color);
   padding-top: var(--space-lg);
 }
 
@@ -157,7 +157,7 @@
   gap: var(--space-md);
   padding: var(--space-sm);
   border-radius: var(--radius-md);
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: var(--bg-panel-hover);
   border: 1px solid var(--border-color);
 }
 
@@ -231,7 +231,7 @@
 .logo-version {
   font-size: 10px;
   color: var(--text-muted);
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: var(--bg-panel-hover);
   padding: 2px 6px;
   border-radius: 8px;
   border: 1px solid var(--border-color);
@@ -299,7 +299,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: var(--bg-panel-hover);
   border: 1px solid var(--border-color);
   padding: 4px 10px;
   border-radius: 20px;
@@ -361,9 +361,9 @@
   justify-content: center;
   font-size: 11px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-inverse);
   cursor: pointer;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--border-color-hover);
   box-shadow: var(--shadow-sm);
 }
 
@@ -408,7 +408,7 @@
 
 .editor-body {
   padding: 0;
-  background-color: rgba(5, 6, 8, 0.4);
+  background-color: var(--bg-app);
 }
 
 .editor-container {
@@ -425,7 +425,7 @@
   border-right: 1px solid var(--border-color);
   padding: var(--space-md) 0;
   text-align: right;
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: var(--bg-panel-header);
   user-select: none;
 }
 
@@ -445,17 +445,18 @@
 .code-line {
   padding: 0 var(--space-lg);
   border-left: 2px solid transparent;
-  color: #c9d1d9;
+  color: var(--text-primary);
 }
 
 .active-execution-line {
-  background-color: rgba(99, 102, 241, 0.08);
+  background-color: var(--bg-highlight);
   border-left-color: var(--accent);
 }
 
 /* Syntax Highlighting Colors */
+/* Syntax Highlighting Colors */
 .syntax-keyword {
-  color: #ff7b72; /* Salmon red */
+  color: var(--syntax-keyword, #ff7b72);
   font-weight: 500;
 }
 
@@ -465,7 +466,7 @@
 }
 
 .syntax-number {
-  color: #79c0ff; /* Light blue */
+  color: var(--syntax-number, #79c0ff);
 }
 
 /* ==========================================================================
@@ -500,7 +501,7 @@
 }
 
 .variable-card {
-  background-color: rgba(255, 255, 255, 0.015);
+  background-color: var(--bg-panel);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: var(--space-md);
@@ -534,7 +535,7 @@
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: var(--bg-panel-hover);
   padding: 1px 4px;
   border-radius: 3px;
   border: 1px solid var(--border-color);
@@ -567,25 +568,25 @@
 }
 
 .type-number {
-  background-color: rgba(14, 165, 233, 0.1);
+  background-color: var(--bg-type-number);
   color: var(--color-info);
-  border: 1px solid rgba(14, 165, 233, 0.2);
+  border: 1px solid var(--border-type-number);
 }
 
 .type-boolean {
-  background-color: rgba(245, 158, 11, 0.1);
+  background-color: var(--bg-type-boolean);
   color: var(--color-warning);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  border: 1px solid var(--border-type-boolean);
 }
 
 .type-array {
-  background-color: rgba(168, 85, 247, 0.1);
+  background-color: var(--bg-type-array);
   color: #c084fc;
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  border: 1px solid var(--border-type-array);
 }
 
 .type-string {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--bg-panel-hover);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
 }
@@ -594,7 +595,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-xs);
-  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-top: 1px solid var(--border-color);
   padding-top: var(--space-xs);
 }
 
@@ -619,7 +620,7 @@
   font-size: 10px;
   color: var(--color-info);
   background-color: var(--color-info-bg);
-  border: 1px solid rgba(14, 165, 233, 0.2);
+  border: 1px solid var(--border-color-info);
   padding: 2px 8px;
   border-radius: 12px;
 }
@@ -640,7 +641,7 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: var(--space-md);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .details-row:last-child {
@@ -681,19 +682,19 @@
 .badge-completed {
   background-color: var(--color-success-bg);
   color: var(--color-success);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid var(--border-color-success);
 }
 
 .badge-running {
   background-color: var(--color-info-bg);
   color: var(--color-info);
-  border: 1px solid rgba(14, 165, 233, 0.2);
+  border: 1px solid var(--border-color-info);
 }
 
 .badge-idle {
   background-color: var(--color-warning-bg);
   color: var(--color-warning);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  border: 1px solid var(--border-color-warning);
 }
 
 .details-code-val {
@@ -730,7 +731,7 @@
   font-size: 10px;
   color: var(--color-success);
   background-color: var(--color-success-bg);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid var(--border-color-success);
   padding: 2px 8px;
   border-radius: 12px;
 }
@@ -739,7 +740,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(5, 6, 8, 0.25);
+  background-color: var(--bg-canvas);
   position: relative;
 }
 
@@ -769,7 +770,7 @@
 }
 
 .tree-node.active-node circle {
-  stroke: #fff;
+  stroke: var(--text-inverse);
 }
 
 .tree-node.active-node:hover circle {
@@ -790,7 +791,7 @@
 
 .stack-badge {
   font-size: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--bg-panel-hover);
   border: 1px solid var(--border-color);
   padding: 2px 8px;
   border-radius: 12px;
@@ -842,7 +843,7 @@
   font-family: var(--font-mono);
   font-size: 10px;
   color: var(--text-muted);
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: var(--bg-frame-number);
   padding: 1px 5px;
   border-radius: 4px;
 }
@@ -864,7 +865,7 @@
   text-transform: uppercase;
   color: var(--color-success);
   background-color: var(--color-success-bg);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  border: 1px solid var(--border-color-success);
   padding: 1px 6px;
   border-radius: 4px;
   margin-left: auto;
@@ -890,7 +891,7 @@
 }
 
 .frame-variables {
-  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-top: 1px solid var(--border-frame-var);
   padding-top: var(--space-sm);
   font-size: 11px;
   display: flex;
@@ -952,7 +953,7 @@
 }
 
 .stat-card {
-  background-color: rgba(255, 255, 255, 0.015);
+  background-color: var(--bg-stat-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: 4px 12px;
@@ -999,7 +1000,7 @@
 }
 
 .stat-icon-wrapper.color-muted {
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: var(--bg-stat-muted);
   color: var(--text-muted);
 }
 
@@ -1053,7 +1054,7 @@
   font-size: 10px;
   color: var(--color-success);
   background-color: var(--color-success-bg);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid var(--border-color-success);
   padding: 2px 8px;
   border-radius: 12px;
 }
@@ -1082,7 +1083,7 @@
 .timeline-track {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: var(--bg-timeline-track);
   border-radius: 2px;
 }
 
@@ -1100,7 +1101,7 @@
   height: 14px;
   border-radius: 50%;
   background-color: var(--accent);
-  border: 2px solid #fff;
+  border: 2px solid var(--text-inverse);
   transform: translateX(-50%);
   cursor: grab;
   z-index: 10;
@@ -1119,7 +1120,7 @@
   height: 10px;
   border-radius: 50%;
   background-color: var(--bg-panel);
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  border: 2px solid var(--border-timeline-tick);
   transform: translateX(-50%);
   cursor: pointer;
   z-index: 5;
@@ -1180,19 +1181,19 @@
 .badge-call {
   background-color: var(--color-info-bg);
   color: var(--color-info);
-  border: 1px solid rgba(14, 165, 233, 0.2);
+  border: 1px solid var(--border-color-info);
 }
 
 .badge-return {
   background-color: var(--color-success-bg);
   color: var(--color-success);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid var(--border-color-success);
 }
 
 .badge-base-case {
   background-color: var(--color-warning-bg);
   color: var(--color-warning);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  border: 1px solid var(--border-color-warning);
 }
 
 .badge-complete {
@@ -1246,7 +1247,7 @@
 
 .player-btn.main-play-btn:hover:not(:disabled) {
   background-color: var(--accent);
-  color: #fff;
+  color: var(--text-inverse);
   border-color: var(--accent);
 }
 

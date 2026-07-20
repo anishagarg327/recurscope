@@ -8,15 +8,18 @@ import {
   Settings, 
   User
 } from 'lucide-react';
+import { useNavigation } from '../contexts/NavigationContext';
 
 export default function Sidebar() {
+  const { currentPage, navigate } = useNavigation();
+
   const menuItems = [
-    { name: 'Playground', icon: Terminal, active: true },
-    { name: 'Algorithms', icon: GitBranch, active: false },
-    { name: 'Examples', icon: BookOpen, active: false },
-    { name: 'Theory', icon: GraduationCap, active: false },
-    { name: 'Replay Sessions', icon: History, active: false },
-    { name: 'Settings', icon: Settings, active: false }
+    { name: 'Playground', icon: Terminal },
+    { name: 'Algorithms', icon: GitBranch },
+    { name: 'Examples', icon: BookOpen },
+    { name: 'Theory', icon: GraduationCap },
+    { name: 'Replay Sessions', icon: History },
+    { name: 'Settings', icon: Settings }
   ];
 
   return (
@@ -29,10 +32,12 @@ export default function Sidebar() {
       <nav className="sidebar-menu">
         {menuItems.map((item, index) => {
           const Icon = item.icon;
+          const isActive = currentPage === item.name;
           return (
             <button 
               key={index} 
-              className={`sidebar-link ${item.active ? 'active' : ''}`}
+              onClick={() => navigate(item.name)}
+              className={`sidebar-link ${isActive ? 'active' : ''}`}
             >
               <Icon size={18} className="sidebar-icon" />
               <span>{item.name}</span>

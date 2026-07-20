@@ -3,16 +3,19 @@ import {
   ChevronDown, 
   GitCommit,
   Moon,
+  Sun,
   Play
 } from 'lucide-react';
 import { useAlgorithms } from '../contexts/AlgorithmsContext';
 import { useExecution } from '../contexts/ExecutionContext';
 import { usePlayback } from '../contexts/PlaybackContext';
+import { useSettings } from '../contexts/SettingsContext';
 
 export default function Navbar() {
   const { selectedAlgorithmId, allAlgorithms, selectAlgorithm } = useAlgorithms();
   const { factorialInput, runAlgorithm } = useExecution();
   const { currentSnapshot, isPlaying } = usePlayback();
+  const { theme, updateSetting } = useSettings();
 
   const [localInput, setLocalInput] = useState(factorialInput);
 
@@ -36,6 +39,10 @@ export default function Navbar() {
 
   const handleRun = () => {
     runAlgorithm(localInput);
+  };
+
+  const toggleTheme = () => {
+    updateSetting('theme', theme === 'dark' ? 'light' : 'dark');
   };
 
   return (
@@ -127,8 +134,8 @@ export default function Navbar() {
           <span>{statusInfo.text}</span>
         </div>
 
-        <button className="icon-btn theme-toggle" title="Toggle Theme">
-          <Moon size={16} />
+        <button className="icon-btn theme-toggle" title="Toggle Theme" onClick={toggleTheme}>
+          {theme === 'dark' ? <Moon size={16} /> : <Sun size={16} />}
         </button>
 
         <div className="navbar-divider"></div>
