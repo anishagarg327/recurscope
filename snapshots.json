@@ -1,0 +1,699 @@
+[
+  {
+    "stepNumber": 0,
+    "currentLine": 1,
+    "callStack": [],
+    "variables": [
+      {
+        "name": "n",
+        "value": "3",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "customRecursion(3)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 0,
+        "status": "active"
+      }
+    ],
+    "recursionTreeEdges": [],
+    "activeFunction": "custom",
+    "activeNodeId": "node_1",
+    "executionStatus": "running",
+    "depth": 1,
+    "eventType": "CALL",
+    "event": "CALL",
+    "id": "custom_snap_0",
+    "timestamp": 1784566846182,
+    "statusMessage": "Entering customRecursion"
+  },
+  {
+    "stepNumber": 1,
+    "currentLine": 1,
+    "callStack": [],
+    "variables": [
+      {
+        "name": "n",
+        "value": "2",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "customRecursion(3)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 0,
+        "status": "running"
+      },
+      {
+        "id": "node_2",
+        "label": "customRecursion(2)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "active"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "custom",
+    "activeNodeId": "node_2",
+    "executionStatus": "running",
+    "depth": 2,
+    "eventType": "CALL",
+    "event": "CALL",
+    "id": "custom_snap_1",
+    "timestamp": 1784566846182,
+    "statusMessage": "Entering customRecursion"
+  },
+  {
+    "stepNumber": 2,
+    "currentLine": 1,
+    "callStack": [],
+    "variables": [
+      {
+        "name": "n",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "customRecursion(3)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 0,
+        "status": "running"
+      },
+      {
+        "id": "node_2",
+        "label": "customRecursion(2)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "running"
+      },
+      {
+        "id": "node_3",
+        "label": "customRecursion(1)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "active"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "pending"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "custom",
+    "activeNodeId": "node_3",
+    "executionStatus": "running",
+    "depth": 3,
+    "eventType": "CALL",
+    "event": "CALL",
+    "id": "custom_snap_2",
+    "timestamp": 1784566846182,
+    "statusMessage": "Entering customRecursion"
+  },
+  {
+    "stepNumber": 3,
+    "currentLine": 1,
+    "callStack": [],
+    "variables": [
+      {
+        "name": "n",
+        "value": "1",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "customRecursion(3)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 0,
+        "status": "running"
+      },
+      {
+        "id": "node_2",
+        "label": "customRecursion(2)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "running"
+      },
+      {
+        "id": "node_3",
+        "label": "customRecursion(1)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "pending"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "custom",
+    "activeNodeId": "node_3",
+    "returnValue": 1,
+    "executionStatus": "running",
+    "depth": 3,
+    "eventType": "RETURN",
+    "event": "RETURN",
+    "id": "custom_snap_3",
+    "timestamp": 1784566846183,
+    "statusMessage": "Returning 1"
+  },
+  {
+    "stepNumber": 4,
+    "currentLine": 1,
+    "callStack": [],
+    "variables": [
+      {
+        "name": "n",
+        "value": "0",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "customRecursion(3)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 0,
+        "status": "running"
+      },
+      {
+        "id": "node_2",
+        "label": "customRecursion(2)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "running"
+      },
+      {
+        "id": "node_3",
+        "label": "customRecursion(1)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      },
+      {
+        "id": "node_4",
+        "label": "customRecursion(0)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "active"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "pending"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_4",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "custom",
+    "activeNodeId": "node_4",
+    "executionStatus": "running",
+    "depth": 3,
+    "eventType": "CALL",
+    "event": "CALL",
+    "id": "custom_snap_4",
+    "timestamp": 1784566846183,
+    "statusMessage": "Entering customRecursion"
+  },
+  {
+    "stepNumber": 5,
+    "currentLine": 1,
+    "callStack": [],
+    "variables": [
+      {
+        "name": "n",
+        "value": "0",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "0",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "customRecursion(3)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 0,
+        "status": "running"
+      },
+      {
+        "id": "node_2",
+        "label": "customRecursion(2)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "running"
+      },
+      {
+        "id": "node_3",
+        "label": "customRecursion(1)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      },
+      {
+        "id": "node_4",
+        "label": "customRecursion(0)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "pending"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_4",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "custom",
+    "activeNodeId": "node_4",
+    "returnValue": 0,
+    "executionStatus": "running",
+    "depth": 3,
+    "eventType": "RETURN",
+    "event": "RETURN",
+    "id": "custom_snap_5",
+    "timestamp": 1784566846183,
+    "statusMessage": "Returning 0"
+  },
+  {
+    "stepNumber": 6,
+    "currentLine": 1,
+    "callStack": [],
+    "variables": [
+      {
+        "name": "n",
+        "value": "2",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "customRecursion(3)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 0,
+        "status": "running"
+      },
+      {
+        "id": "node_2",
+        "label": "customRecursion(2)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "success"
+      },
+      {
+        "id": "node_3",
+        "label": "customRecursion(1)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      },
+      {
+        "id": "node_4",
+        "label": "customRecursion(0)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_4",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "custom",
+    "activeNodeId": "node_2",
+    "returnValue": 1,
+    "executionStatus": "running",
+    "depth": 2,
+    "eventType": "RETURN",
+    "event": "RETURN",
+    "id": "custom_snap_6",
+    "timestamp": 1784566846183,
+    "statusMessage": "Returning 1"
+  },
+  {
+    "stepNumber": 7,
+    "currentLine": 1,
+    "callStack": [],
+    "variables": [
+      {
+        "name": "n",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "customRecursion(3)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 0,
+        "status": "running"
+      },
+      {
+        "id": "node_2",
+        "label": "customRecursion(2)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "success"
+      },
+      {
+        "id": "node_3",
+        "label": "customRecursion(1)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      },
+      {
+        "id": "node_4",
+        "label": "customRecursion(0)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      },
+      {
+        "id": "node_5",
+        "label": "customRecursion(1)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "active"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_1",
+        "to": "node_5",
+        "status": "active"
+      }
+    ],
+    "activeFunction": "custom",
+    "activeNodeId": "node_5",
+    "executionStatus": "running",
+    "depth": 2,
+    "eventType": "CALL",
+    "event": "CALL",
+    "id": "custom_snap_7",
+    "timestamp": 1784566846183,
+    "statusMessage": "Entering customRecursion"
+  },
+  {
+    "stepNumber": 8,
+    "currentLine": 1,
+    "callStack": [],
+    "variables": [
+      {
+        "name": "n",
+        "value": "1",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "1",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "customRecursion(3)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 0,
+        "status": "running"
+      },
+      {
+        "id": "node_2",
+        "label": "customRecursion(2)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "success"
+      },
+      {
+        "id": "node_3",
+        "label": "customRecursion(1)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      },
+      {
+        "id": "node_4",
+        "label": "customRecursion(0)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      },
+      {
+        "id": "node_5",
+        "label": "customRecursion(1)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "success"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_1",
+        "to": "node_5",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "custom",
+    "activeNodeId": "node_5",
+    "returnValue": 1,
+    "executionStatus": "running",
+    "depth": 2,
+    "eventType": "RETURN",
+    "event": "RETURN",
+    "id": "custom_snap_8",
+    "timestamp": 1784566846183,
+    "statusMessage": "Returning 1"
+  },
+  {
+    "stepNumber": 9,
+    "currentLine": 1,
+    "callStack": [],
+    "variables": [
+      {
+        "name": "n",
+        "value": "3",
+        "type": "number"
+      },
+      {
+        "name": "returnValue",
+        "value": "2",
+        "type": "number"
+      }
+    ],
+    "recursionTreeNodes": [
+      {
+        "id": "node_1",
+        "label": "customRecursion(3)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 0,
+        "status": "success"
+      },
+      {
+        "id": "node_2",
+        "label": "customRecursion(2)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "success"
+      },
+      {
+        "id": "node_3",
+        "label": "customRecursion(1)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      },
+      {
+        "id": "node_4",
+        "label": "customRecursion(0)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 2,
+        "status": "success"
+      },
+      {
+        "id": "node_5",
+        "label": "customRecursion(1)",
+        "cx": 0,
+        "cy": 0,
+        "depth": 1,
+        "status": "success"
+      }
+    ],
+    "recursionTreeEdges": [
+      {
+        "from": "node_1",
+        "to": "node_2",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3",
+        "status": "success"
+      },
+      {
+        "from": "node_2",
+        "to": "node_4",
+        "status": "success"
+      },
+      {
+        "from": "node_1",
+        "to": "node_5",
+        "status": "success"
+      }
+    ],
+    "activeFunction": "custom",
+    "activeNodeId": "node_1",
+    "returnValue": 2,
+    "executionStatus": "completed",
+    "depth": 1,
+    "eventType": "COMPLETE",
+    "event": "COMPLETE",
+    "id": "custom_snap_9",
+    "timestamp": 1784566846183,
+    "statusMessage": "Execution Completed"
+  }
+]

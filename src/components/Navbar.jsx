@@ -12,7 +12,7 @@ import { usePlayback } from '../contexts/PlaybackContext';
 import { useSettings } from '../contexts/SettingsContext';
 
 export default function Navbar() {
-  const { selectedAlgorithmId, allAlgorithms, selectAlgorithm } = useAlgorithms();
+  const { selectedAlgorithmId, allAlgorithms, selectAlgorithm, isCustomMode, customParams, setCustomParams } = useAlgorithms();
   const { factorialInput, runAlgorithm } = useExecution();
   const { currentSnapshot, isPlaying } = usePlayback();
   const { theme, updateSetting } = useSettings();
@@ -45,6 +45,10 @@ export default function Navbar() {
     updateSetting('theme', theme === 'dark' ? 'light' : 'dark');
   };
 
+  const updateCustomParam = (name, val) => {
+    setCustomParams(prev => prev.map(p => p.name === name ? { ...p, value: val } : p));
+  };
+
   return (
     <header className="navbar">
       <div className="navbar-left">
@@ -75,31 +79,60 @@ export default function Navbar() {
           </div>
         </div>
 
-        {selectedAlgorithmId === 'factorial' && (
+        {(isCustomMode || selectedAlgorithmId === 'factorial' || selectedAlgorithmId === 'fibonacci' || selectedAlgorithmId === 'binarySearch') && (
           <div className="navbar-run-control" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
             <div className="navbar-divider" style={{ height: '20px', margin: '0' }}></div>
-            <div className="input-container" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
-              <label style={{ fontSize: '11px', fontWeight: '600', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>n =</label>
-              <input 
-                type="number" 
-                value={localInput} 
-                onChange={(e) => setLocalInput(Math.max(1, Math.min(10, parseInt(e.target.value) || 1)))}
-                min="1"
-                max="10"
-                style={{
-                  width: '50px',
-                  backgroundColor: 'var(--bg-panel)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: 'var(--radius-xs)',
-                  padding: '4px 6px',
-                  color: 'var(--text-primary)',
-                  fontSize: '12px',
-                  fontWeight: '600',
-                  textAlign: 'center',
-                  outline: 'none'
-                }}
-              />
-            </div>
+            
+            {isCustomMode ? (
+              <div style={{ display: 'flex', gap: '8px' }}>
+                {customParams.map(param => (
+                  <div key={param.name} className="input-container" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
+                    <label style={{ fontSize: '11px', fontWeight: '600', color: 'var(--text-secondary)', letterSpacing: '0.3px' }}>{param.name} =</label>
+                    <input 
+                      type="text" 
+                      value={param.value} 
+                      onChange={(e) => updateCustomParam(param.name, e.target.value)}
+                      style={{
+                        width: '60px',
+                        backgroundColor: 'var(--bg-panel)',
+                        border: '1px solid var(--border-color)',
+                        borderRadius: 'var(--radius-xs)',
+                        padding: '4px 6px',
+                        color: 'var(--text-primary)',
+                        fontSize: '12px',
+                        fontWeight: '600',
+                        textAlign: 'center',
+                        outline: 'none'
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : selectedAlgorithmId === 'factorial' ? (
+              <div className="input-container" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
+                <label style={{ fontSize: '11px', fontWeight: '600', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>n =</label>
+                <input 
+                  type="number" 
+                  value={localInput} 
+                  onChange={(e) => setLocalInput(Math.max(1, Math.min(10, parseInt(e.target.value) || 1)))}
+                  min="1"
+                  max="10"
+                  style={{
+                    width: '50px',
+                    backgroundColor: 'var(--bg-panel)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: 'var(--radius-xs)',
+                    padding: '4px 6px',
+                    color: 'var(--text-primary)',
+                    fontSize: '12px',
+                    fontWeight: '600',
+                    textAlign: 'center',
+                    outline: 'none'
+                  }}
+                />
+              </div>
+            ) : null}
+            
             <button 
               onClick={handleRun}
               className="player-btn main-play-btn"

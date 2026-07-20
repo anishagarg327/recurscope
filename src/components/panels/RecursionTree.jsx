@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import { GitFork, ZoomIn, ZoomOut, RotateCcw, Maximize, Target } from 'lucide-react';
+import { GitFork } from 'lucide-react';
 import { usePlayback } from '../../contexts/PlaybackContext';
 import { useExecution } from '../../contexts/ExecutionContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const NODE_W = 280;
-const NODE_H = 180; // approximate height for spacing
-const H_SPACING = 100;
-const V_SPACING = 120;
+const NODE_W = 260;
+const NODE_H = 140; // approximate height for spacing
+const H_SPACING = 40;
+const V_SPACING = 60;
 
 export default function RecursionTree() {
   const { currentSnapshot, isPlaying, currentStepIndex, goToStep } = usePlayback();
@@ -23,6 +23,7 @@ export default function RecursionTree() {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [isUserPanned, setIsUserPanned] = useState(false);
+  const [hasAutoFitted, setHasAutoFitted] = useState(false);
   
   const [hoveredNode, setHoveredNode] = useState(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -160,12 +161,11 @@ export default function RecursionTree() {
     const scaleX = vw / width;
     const scaleY = vh / height;
     
-    // CRITICAL FIX: Never allow zoom to go below 0.75 so nodes don't look tiny
-    const newZoom = Math.max(0.75, Math.min(scaleX, scaleY, 1.5));
+    const newZoom = Math.max(0.75, Math.min(scaleX, scaleY, 1.2));
 
     const targetX = (vw / 2) - ((minX + width / 2) * newZoom);
-    // If it's very tall, don't center it vertically, align it closer to the top so root is visible
-    const targetY = height * newZoom > vh ? 50 : (vh / 2) - ((minY + height / 2) * newZoom);
+    // Align closer to top if very tall, else center
+    const targetY = height * newZoom > vh ? 80 : (vh / 2) - ((minY + height / 2) * newZoom);
 
     setZoom(newZoom);
     setPan({ x: targetX, y: targetY });
@@ -184,18 +184,27 @@ export default function RecursionTree() {
       const pos = layout[activeNodeId];
       const { w: vw, h: vh } = getViewportSize();
       const targetX = (vw / 2) - (pos.x * zoom);
-      const targetY = (vh / 3) - (pos.y * zoom);
+      const targetY = (vh / 2) - (pos.y * zoom);
       setPan({ x: targetX, y: targetY });
       setIsUserPanned(false);
     }
   }, [activeNodeId, layout, zoom, getViewportSize]);
 
-  // Auto-pan
+  // Auto-pan to follow active node during execution
   useEffect(() => {
-    if (isPlaying && activeNodeId && layout[activeNodeId] && !isUserPanned) {
+    if (activeNodeId && layout[activeNodeId] && currentSnapshot?.executionStatus !== 'completed' && !isUserPanned) {
       centerActiveNode();
+      setHasAutoFitted(false);
     }
-  }, [activeNodeId, isPlaying, layout, isUserPanned, centerActiveNode]);
+  }, [activeNodeId, layout, isUserPanned, centerActiveNode, currentSnapshot?.executionStatus]);
+
+  // Auto fit to view when execution completes
+  useEffect(() => {
+    if (currentSnapshot?.executionStatus === 'completed' && !hasAutoFitted) {
+      fitView();
+      setHasAutoFitted(true);
+    }
+  }, [currentSnapshot?.executionStatus, fitView, hasAutoFitted]);
 
   // Interaction handlers
   const handleMouseDown = (e) => {
@@ -211,11 +220,20 @@ export default function RecursionTree() {
   };
   const handleMouseUpOrLeave = () => setIsDragging(false);
 
-  const zoomIn = () => { setZoom(prev => Math.min(3, prev + 0.2)); setIsUserPanned(true); };
-  const zoomOut = () => { setZoom(prev => Math.max(0.2, prev - 0.2)); setIsUserPanned(true); };
-
-  const resetZoomPan = () => {
-    fitView();
+  const handleWheel = (e) => {
+    if (e.ctrlKey || e.metaKey) {
+      // Optional: zoom with wheel
+      e.preventDefault();
+      const zoomChange = e.deltaY > 0 ? -0.1 : 0.1;
+      setZoom(prev => Math.max(0.3, Math.min(3, prev + zoomChange)));
+    } else {
+      // Pan with wheel
+      setPan(prev => ({
+        x: prev.x - e.deltaX,
+        y: prev.y - e.deltaY
+      }));
+    }
+    setIsUserPanned(true);
   };
 
   const handleNodeClick = (nodeId) => {
@@ -231,7 +249,8 @@ export default function RecursionTree() {
     if (isActive) return { border: '#3b82f6', bg: 'var(--bg-panel)', text: 'var(--text-primary)', shadow: '0 0 20px rgba(59, 130, 246, 0.4)' };
     if (node.status === 'running') return { border: '#a855f7', bg: 'var(--bg-panel)', text: 'var(--text-primary)', shadow: '0 0 15px rgba(168, 85, 247, 0.3)' };
     if (node.status === 'success') {
-       if (info?.isBaseCase) return { border: '#eab308', bg: 'var(--bg-panel)', text: 'var(--text-primary)', shadow: '0 0 10px rgba(234, 179, 8, 0.2)' };
+       const isLeaf = !edges.some(e => e.from === node.id);
+       if (info?.isBaseCase || isLeaf) return { border: '#eab308', bg: 'var(--bg-panel)', text: 'var(--text-primary)', shadow: '0 0 10px rgba(234, 179, 8, 0.2)' };
        return { border: '#22c55e', bg: 'var(--bg-panel)', text: 'var(--text-primary)', shadow: '0 0 10px rgba(34, 197, 94, 0.2)' };
     }
     if (node.status === 'error') return { border: '#ef4444', bg: 'var(--bg-panel)', text: 'var(--text-primary)', shadow: '0 0 10px rgba(239, 68, 68, 0.2)' };
@@ -292,6 +311,7 @@ export default function RecursionTree() {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUpOrLeave}
         onMouseLeave={handleMouseUpOrLeave}
+        onWheel={handleWheel}
         style={{ 
           flex: 1,
           cursor: isDragging ? 'grabbing' : 'grab', 
@@ -314,7 +334,7 @@ export default function RecursionTree() {
             transformOrigin: '0 0'
           }}
           animate={{ x: pan.x, y: pan.y, scale: zoom }}
-          transition={{ type: 'spring', stiffness: 250, damping: 25 }}
+          transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.8 }}
         >
           {/* SVG for connections */}
           <svg 
@@ -376,7 +396,7 @@ export default function RecursionTree() {
                 key={node.id}
                 initial={{ opacity: 0, scale: 0.7, y: 20 }}
                 animate={{ opacity: isDimmed ? 0.4 : 1, scale: 1, y: 0 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 20 }}
                 onClick={(e) => { e.stopPropagation(); handleNodeClick(node.id); }}
                 onMouseEnter={() => setHoveredNode(node)}
                 onMouseLeave={() => setHoveredNode(null)}
@@ -420,7 +440,7 @@ export default function RecursionTree() {
                   <div style={{ display: 'grid', gridTemplateColumns: '70px 1fr', alignItems: 'center' }}>
                     <span style={{ color: 'var(--text-muted)' }}>Status:</span>
                     <span style={{ fontWeight: 'bold', color: theme.text, textTransform: 'uppercase' }}>
-                      {node.status} {info.isBaseCase && node.status === 'success' && '(BASE CASE)'}
+                      {node.status} {((info?.isBaseCase || !edges.some(e => e.from === node.id)) && node.status === 'success') && '(BASE CASE)'}
                     </span>
                   </div>
 
@@ -451,56 +471,6 @@ export default function RecursionTree() {
             );
           })}
         </motion.div>
-
-        {/* Legend */}
-        {nodes.length > 0 && (
-          <div style={{
-            position: 'absolute',
-            bottom: '20px',
-            left: '20px',
-            backgroundColor: 'var(--bg-panel)',
-            border: '1px solid var(--border-color)',
-            borderRadius: '8px',
-            padding: '10px 14px',
-            zIndex: 20,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '8px',
-            fontSize: '11px',
-            color: 'var(--text-primary)',
-            boxShadow: 'var(--shadow-lg)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#3b82f6', boxShadow: '0 0 6px #3b82f6' }}/> ACTIVE</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#a855f7', boxShadow: '0 0 6px #a855f7' }}/> RUNNING</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#22c55e', boxShadow: '0 0 6px #22c55e' }}/> COMPLETED</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#eab308', boxShadow: '0 0 6px #eab308' }}/> BASE CASE</div>
-          </div>
-        )}
-
-        {/* Controls */}
-        {nodes.length > 0 && (
-          <div style={{
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '8px',
-            backgroundColor: 'var(--bg-panel)',
-            border: '1px solid var(--border-color)',
-            borderRadius: '8px',
-            padding: '8px',
-            zIndex: 20,
-            boxShadow: 'var(--shadow-lg)'
-          }} onMouseDown={(e) => e.stopPropagation()}>
-            <button onClick={zoomIn} className="icon-btn" title="Zoom In" style={btnStyle}><ZoomIn size={18} /></button>
-            <button onClick={zoomOut} className="icon-btn" title="Zoom Out" style={btnStyle}><ZoomOut size={18} /></button>
-            <div style={{ height: '1px', backgroundColor: '#334155', margin: '4px 0' }} />
-            <button onClick={fitView} className="icon-btn" title="Fit View" style={btnStyle}><Maximize size={18} /></button>
-            <button onClick={resetZoomPan} className="icon-btn" title="Reset View" style={btnStyle}><RotateCcw size={18} /></button>
-            <button onClick={centerActiveNode} className="icon-btn" title="Center Active Node" style={btnStyle}><Target size={18} /></button>
-          </div>
-        )}
 
         {/* HOVER TOOLTIP */}
         <AnimatePresence>
@@ -577,16 +547,3 @@ export default function RecursionTree() {
   );
 }
 
-const btnStyle = {
-  width: '36px', 
-  height: '36px', 
-  display: 'flex', 
-  alignItems: 'center', 
-  justifyContent: 'center',
-  borderRadius: '6px',
-  color: 'var(--text-secondary)',
-  backgroundColor: 'transparent',
-  border: 'none',
-  cursor: 'pointer',
-  transition: 'background-color 0.2s'
-};

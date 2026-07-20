@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import ErrorBoundary from './components/ErrorBoundary';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import Playground from './pages/Playground';
@@ -40,7 +41,9 @@ function MainLayout() {
   const { theme } = useSettings();
 
   return (
-    <div className={`app-wrapper ${theme === 'light' ? 'light-theme' : ''}`}>
+    <ErrorBoundary>
+      <div className={`app-wrapper ${theme === 'light' ? 'light-theme' : ''}`}>
+
       {/* Top Navbar */}
       <Navbar />
 
@@ -52,7 +55,8 @@ function MainLayout() {
         {/* Central Router Area */}
         <PageRouter />
       </div>
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 }
 

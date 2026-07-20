@@ -38,7 +38,7 @@
   gap: var(--space-md);
   overflow: hidden;
   height: 100%;
-  width: 360px;
+  width: 280px;
   flex-shrink: 0;
   min-height: 0;
 }
@@ -58,7 +58,7 @@
   gap: var(--space-md);
   overflow: hidden;
   height: 100%;
-  width: 310px;
+  width: 250px;
   flex-shrink: 0;
   min-height: 0;
 }
@@ -435,38 +435,15 @@
   font-size: 11px;
 }
 
-.editor-code {
-  flex: 1;
-  padding: var(--space-md) 0;
-  overflow-x: auto;
-  white-space: pre;
+/* Monaco Editor Custom Styles */
+.monaco-active-line-highlight {
+  background-color: var(--bg-highlight) !important;
 }
 
-.code-line {
-  padding: 0 var(--space-lg);
-  border-left: 2px solid transparent;
-  color: var(--text-primary);
-}
-
-.active-execution-line {
-  background-color: var(--bg-highlight);
-  border-left-color: var(--accent);
-}
-
-/* Syntax Highlighting Colors */
-/* Syntax Highlighting Colors */
-.syntax-keyword {
-  color: var(--syntax-keyword, #ff7b72);
-  font-weight: 500;
-}
-
-.syntax-comment {
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-.syntax-number {
-  color: var(--syntax-number, #79c0ff);
+.monaco-active-line-glyph {
+  background-color: var(--accent) !important;
+  width: 4px !important;
+  margin-left: 2px;
 }
 
 /* ==========================================================================
